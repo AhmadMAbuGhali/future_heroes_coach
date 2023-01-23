@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_1000001589" data-name="Group 1000001589" transform="translate(-352 -198)">
+    <circle id="Ellipse_81" data-name="Ellipse 81" cx="16" cy="16" r="16" transform="translate(352 198)" fill="rgba(138,87,220,0.09)"/>
+    <path id="Icon_ionic-md-notifications-outline" data-name="Icon ionic-md-notifications-outline" d="M10.039,4.706a5.647,5.647,0,0,1,.934.175,3.981,3.981,0,0,1,3.034,3.9v4.985l.364.366.3.306H5.324l.3-.306.364-.366V8.781a3.981,3.981,0,0,1,3.034-3.9,6.915,6.915,0,0,1,.934-.175M10,1.875A1.194,1.194,0,0,0,8.787,3.094v.569A5.266,5.266,0,0,0,4.743,8.781V13.25L3.125,14.875v.813h13.75v-.812L15.257,13.25V8.781a5.266,5.266,0,0,0-4.044-5.119V3.094A1.194,1.194,0,0,0,10,1.875ZM11.618,16.5H8.382a1.618,1.618,0,1,0,3.235,0Z" transform="translate(358 204)" fill="#8a57dc"/>
+  </g>
+</svg>

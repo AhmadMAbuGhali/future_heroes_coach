@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="358" height="48" viewBox="0 0 358 48">
+  <g id="Group_8" data-name="Group 8" transform="translate(-36 -37)">
+    <path id="Path_112" data-name="Path 112" d="M8,0H350a8,8,0,0,1,8,8V40a8,8,0,0,1-8,8H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0Z" transform="translate(36 37)" fill="#f66"/>
+    <text id="البريد_الإلكتروني_أو_كلمة_المرور_غير_صحيحة" data-name="البريد الإلكتروني أو كلمة المرور غير صحيحة" transform="translate(121 65)" fill="#fff" font-size="12" font-family="DroidArabicKufi, Droid Arabic Kufi"><tspan x="0" y="0">البريد الإلكتروني أو كلمة المرور غير صحيحة</tspan></text>
+    <path id="Icon_metro-cancel" data-name="Icon metro-cancel" d="M22.279,11.568ZM12,19.923a8.355,8.355,0,1,1,8.355-8.355A8.355,8.355,0,0,1,12,19.923Zm3.213-13.5L12,9.64,8.783,6.427,6.855,8.355l3.213,3.213L6.855,14.782,8.783,16.71,12,13.5,15.21,16.71l1.928-1.928-3.213-3.213,3.213-3.213Z" transform="translate(48.343 48.715)" fill="#fff"/>
+    <path id="Icon_material-error-outline" data-name="Icon material-error-outline" d="M11,15h2v2H11Zm0-8h2v6H11Zm.99-5A10,10,0,1,0,22,12,10,10,0,0,0,11.99,2ZM12,20a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" transform="translate(356.8 49)" fill="#fff"/>
+  </g>
+</svg>
