@@ -1,13 +1,9 @@
 import 'package:future_heroes_coach/pages/navbar/main_navbar.dart';
 import 'package:future_heroes_coach/pages/auth/CoachSelection.dart';
-import 'package:future_heroes_coach/pages/auth/EndSignUp.dart';
 import 'package:future_heroes_coach/pages/auth/NoConnection.dart';
-import 'package:future_heroes_coach/pages/auth/SignUpPersonalData.dart';
-import 'package:future_heroes_coach/pages/auth/SubscriptionType.dart';
 import 'package:future_heroes_coach/pages/auth/SuccessLogin.dart';
-import 'package:future_heroes_coach/pages/auth/TermsAndConditions.dart';
 import 'package:future_heroes_coach/pages/auth/codeVerification.dart';
-import 'package:future_heroes_coach/pages/auth/diseases.dart';
+
 import 'package:future_heroes_coach/pages/auth/forgetPassword.dart';
 import 'package:future_heroes_coach/pages/auth/login.dart';
 import 'package:future_heroes_coach/pages/auth/setPassword.dart';
@@ -18,16 +14,12 @@ import 'package:future_heroes_coach/pages/profile/class_time.dart';
 import 'package:future_heroes_coach/pages/profile/personal_data.dart';
 import 'package:future_heroes_coach/pages/profile/postpone%D9%80an%D9%80appointment.dart';
 import 'package:future_heroes_coach/pages/profile/profile_page.dart';
-import 'package:future_heroes_coach/pages/profile/ratings.dart';
 import 'package:future_heroes_coach/pages/profile/requests%D9%80and%D9%80complaints.dart';
 import 'package:future_heroes_coach/pages/profile/send_complaints.dart';
 import 'package:future_heroes_coach/pages/profile/send_requests.dart';
-import 'package:future_heroes_coach/pages/profile/subscription_upgrade_successfully.dart';
 import 'package:get/get.dart';
 
-import '../pages/auth/SignUppart2.dart';
 import '../pages/profile/language.dart';
-import '../pages/profile/subscription_upgrade.dart';
 import '../pages/splash_page/splash_page.dart';
 
 class RouteHelper {
@@ -157,30 +149,9 @@ class RouteHelper {
         return SendRequests();
       },
     ),
-    GetPage(
-      name: subscriptionUpgradeSuccessfully,
-      page: () {
-        return SubscriptionUpgradeSuccessfully();
-      },
-    ),
-    GetPage(
-      name: signUpPart2,
-      page: () {
-        return SignUpScreenPart2();
-      },
-    ),
-    GetPage(
-      name: signupPersonalData,
-      page: () {
-        return SignUpPersonalData();
-      },
-    ),
-    GetPage(
-      name: termsAndConditions,
-      page: () {
-        return TermsAndConditions();
-      },
-    ),
+
+
+
     GetPage(
       name: changePassword,
       page: () {
@@ -193,48 +164,21 @@ class RouteHelper {
         return ClassTime();
       },
     ),
-    GetPage(
-      name: diseases,
-      page: () {
-        return Diseases();
-      },
-    ),
+
     GetPage(
       name: coachSelection,
       page: () {
         return CoachSelection();
       },
     ),
-    GetPage(
-      name: subscriptionType,
-      page: () {
-        return SubscriptionType();
-      },
-    ),
-    GetPage(
-      name: endSignUp,
-      page: () {
-        return EndSignUp();
-      },
-    ),
+
     GetPage(
       name: forgetPassword,
       page: () {
         return ForgetPassword();
       },
     ),
-    GetPage(
-      name: subscriptionUpgrade,
-      page: () {
-        return SubscriptionUpgrade();
-      },
-    ),
-    GetPage(
-      name: ratings,
-      page: () {
-        return Ratings();
-      },
-    ),
+
     GetPage(
       name: setPassword,
       page: () {

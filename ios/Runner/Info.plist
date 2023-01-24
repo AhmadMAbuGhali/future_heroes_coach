@@ -4,8 +4,16 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>io.flutter.embedded_views_preview</key>
+    <true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>To chose a picture from the gallery</string>
+    <key>NSCameraUsageDescription</key>
+    <string>To chose a picture from the Camera</string>
+     <key>NSMicrophoneUsageDescription</key>
+    <string>To get voice from camera</string>
 	<key>CFBundleDisplayName</key>
-	<string>Future Heroes Coach</string>
+	<string>Future Heroes Customer</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +21,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>future_heroes_coach</string>
+	<string>future_heroes_customer</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -47,5 +55,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleLocalizations</key>
+    <array>
+    	<string>en</string>
+    	<string>ar</string>
+    </array>
 </dict>
 </plist>

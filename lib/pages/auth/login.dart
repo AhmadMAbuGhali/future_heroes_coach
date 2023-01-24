@@ -103,22 +103,17 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 80.h,
+              ),
               CustomButtonPrimary(
                 text: 'login'.tr,
                 onpressed: () {
                   Get.toNamed(RouteHelper.successLogin);
                 },
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              CustomTextSignUpOrSignin(
-                onTap: () {
-                  Get.toNamed(RouteHelper.signUpPart2);
-                },
-                textone: 'dontHaveAccount'.tr,
-                texttwo: 'makeAccount'.tr,
-              ),
+
+
             ],
           )),
     );
