@@ -206,6 +206,12 @@ class MyLocale extends Translations {
           "middle": "متوسط",
           "expert": "خبير",
           "snakbarOffers": "يمكنك التوجه للنادي لتأكيد  الطلب",
+          "ShowStudents": "عرض الطلاب",
+          "PerformanceAppraisal": "تقييم الأداء في الحصة",
+          "NameOfStudent": "يوسف نعمان الجزار",
+          "Submitevaluation": "ارسال التقييم",
+          "AttendanceRecording": "تسجيل الحضور",
+          "": "",
         },
         "en": {
           "login": "Login",
@@ -333,7 +339,7 @@ class MyLocale extends Translations {
           "changePassword": "Change Password",
           "lastPassword": "The previous password",
           "newPassword": "new password",
-          "requests": "requests",
+          "requests": "Requests",
           "complaints": "complaints",
           "requestTitle": "Your subscription has been renewed successfully",
           "requestBody":
@@ -412,6 +418,11 @@ class MyLocale extends Translations {
           "middle": "middle",
           "expert": "expert",
           "snakbarOffers": "You can go to the club to confirm the request",
+          "ShowStudents": "Show Students",
+          "PerformanceAppraisal": "Performance appraisal in the class",
+          "NameOfStudent": "Yousef Numan Aljazzar",
+          "Submitevaluation": "Submit Evaluation",
+          "AttendanceRecording": "Attendance Recording"
         }
       };
 }

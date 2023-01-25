@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_coach/pages/home/home_screen.dart';
-import 'package:future_heroes_coach/pages/offer/offer_page.dart';
+
 import 'package:future_heroes_coach/pages/profile/profile_page.dart';
+import 'package:future_heroes_coach/pages/profile/requests%D9%80and%D9%80complaints.dart';
 import 'package:future_heroes_coach/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
@@ -59,7 +60,7 @@ class _MainNavBarState extends State<MainNavBar> {
       ProfilePage(),
       NotificationPage(),
       QRCode(),
-      OfferPage(),
+      RequestsAndComplaints(),
       HomeScreen()
     ];
   }
@@ -86,8 +87,8 @@ class _MainNavBarState extends State<MainNavBar> {
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.localoffer),
-        title: ("offer".tr),
+        icon: SvgPicture.asset(IconAssets.paper),
+        title: ("requests".tr),
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),

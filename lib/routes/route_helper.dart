@@ -1,5 +1,7 @@
+import 'package:future_heroes_coach/pages/ShowStudents/PerformanceEvaluation.dart';
+import 'package:future_heroes_coach/pages/ShowStudents/ShowStudents.dart';
 import 'package:future_heroes_coach/pages/navbar/main_navbar.dart';
-import 'package:future_heroes_coach/pages/auth/CoachSelection.dart';
+
 import 'package:future_heroes_coach/pages/auth/NoConnection.dart';
 import 'package:future_heroes_coach/pages/auth/SuccessLogin.dart';
 import 'package:future_heroes_coach/pages/auth/codeVerification.dart';
@@ -53,6 +55,8 @@ class RouteHelper {
   static const String successLogin = "/successLogin";
   static const String homeScreen = "/homeScreen";
   static const String language = "/language";
+  static const String performanceEvaluation = "/performanceEvaluation";
+  static const String showStudents = "/showStudents";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => '$initial';
@@ -84,6 +88,8 @@ class RouteHelper {
   static String getSuccessLogin() => '$successLogin';
   static String getHomeScreen() => '$homeScreen';
   static String getLanguage() => '$language';
+  static String getPerformanceEvaluation() => '$performanceEvaluation';
+  static String getShowStudents() => '$showStudents';
 
   static List<GetPage> routes = [
     GetPage(
@@ -149,9 +155,6 @@ class RouteHelper {
         return SendRequests();
       },
     ),
-
-
-
     GetPage(
       name: changePassword,
       page: () {
@@ -164,21 +167,12 @@ class RouteHelper {
         return ClassTime();
       },
     ),
-
-    GetPage(
-      name: coachSelection,
-      page: () {
-        return CoachSelection();
-      },
-    ),
-
     GetPage(
       name: forgetPassword,
       page: () {
         return ForgetPassword();
       },
     ),
-
     GetPage(
       name: setPassword,
       page: () {
@@ -207,6 +201,18 @@ class RouteHelper {
       name: language,
       page: () {
         return Language();
+      },
+    ),
+    GetPage(
+      name: performanceEvaluation,
+      page: () {
+        return PerformanceEvaluation();
+      },
+    ),
+    GetPage(
+      name: showStudents,
+      page: () {
+        return ShowStudents();
       },
     ),
   ];

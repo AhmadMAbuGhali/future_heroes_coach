@@ -93,33 +93,41 @@ class _NotificationPageState extends State<NotificationPage> {
                                       "notificationTitle".tr,
                                       style: getBoldStyle(
                                           color: ColorManager.black,
-                                          fontSize: 14),
+                                          fontSize: 12),
                                     ),
                                   ],
                                 ),
-                                collapsed: Text(
-                                  "notificationBody".tr,
-                                  softWrap: true,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
+                                collapsed: Container(
+                                  margin: EdgeInsets.only(right: 55),
+                                  child: Text(
+                                    "notificationBody".tr,
+                                    softWrap: true,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: getRegularStyle(
+                                        color: ColorManager.gray),
+                                  ),
                                 ),
-                                expanded: Column(
-                                  children: [
-                                    Text("notificationBody".tr),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                          IconAssets.time,
-                                          color: ColorManager.primary,
-                                        ),
-                                        Text(
-                                          "02 ساعات".tr,
-                                          style: getRegularStyle(
-                                              color: ColorManager.primary),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                expanded: Container(
+                                  margin: EdgeInsets.only(right: 55),
+                                  child: Column(
+                                    children: [
+                                      Text("notificationBody".tr),
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(
+                                            IconAssets.time,
+                                            color: ColorManager.primary,
+                                          ),
+                                          Text(
+                                            "02 ساعات".tr,
+                                            style: getRegularStyle(
+                                                color: ColorManager.primary),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 )),
                             Divider(
                               thickness: 2,

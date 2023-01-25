@@ -25,6 +25,8 @@ class ImageAssets {
   static const String verification = '$IMAGE_PATH/verification.svg';
   static const String welcome = '$IMAGE_PATH/welcome.svg';
   static const String mainImage = '$IMAGE_PATH/main_image.png';
+  static const String Taekwondo_pictogram =
+      '$IMAGE_PATH/Taekwondo_pictogram.svg';
 }
 
 const String ICON_PATH = 'assets/icon';

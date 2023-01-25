@@ -36,8 +36,8 @@ class _PersonalDataState extends State<PersonalData> {
             Container(
               padding: EdgeInsets.only(
                 top: 45.h,
-                left: 20.w,
-                right: 20.w,
+                // left: 20.w,
+                // right: 20.w,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,

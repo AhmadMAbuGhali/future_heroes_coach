@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             left: 0,
             right: 0,
             child: Container(
-              height: 300,
+              height: 270,
               width: double.infinity,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
@@ -71,9 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text("homeTopText2".tr,
                               style: getRegularStyle(
                                   color: ColorManager.white, fontSize: 11)),
-                          Text("homeTopText3".tr,
-                              style: getRegularStyle(
-                                  color: ColorManager.white, fontSize: 11)),
+                          // Text("homeTopText3".tr,
+                          //     style: getRegularStyle(
+                          //         color: ColorManager.white, fontSize: 11)),
                         ],
                       ),
                     ],
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 250.h,
+            top: 230.h,
             left: 20,
             right: 20,
             child: ClassTimeWidget(),

@@ -100,19 +100,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   height: 5.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "playerLevel".tr,
-                      style: getBoldStyle(color: Colors.black, fontSize: 12),
-                    ),
-                    Text(
-                      "Beginner".tr,
-                      style: getRegularStyle(color: ColorManager.primary),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       "playerLevel".tr,
+                //       style: getBoldStyle(color: Colors.black, fontSize: 12),
+                //     ),
+                //     Text(
+                //       "Beginner".tr,
+                //       style: getRegularStyle(color: ColorManager.primary),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(
                   height: 40.h,
                 ),
@@ -145,22 +145,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     }),
 
                 //ترقية الاشتراك
-                ProfileSection(
-                    label: "subscriptionUpgrade".tr,
-                    haveArrow: true,
-                    icon: IconAssets.jewelry,
-                    onTap: () {
-                      Get.toNamed(RouteHelper.subscriptionUpgrade);
-                    }),
+                // ProfileSection(
+                //     label: "subscriptionUpgrade".tr,
+                //     haveArrow: true,
+                //     icon: IconAssets.jewelry,
+                //     onTap: () {
+                //       Get.toNamed(RouteHelper.subscriptionUpgrade);
+                //     }),
 
-                //التقيمات
+                //تاجيل موعد حجز
 
                 ProfileSection(
-                    label: "rating".tr,
+                    label: "requestPostponement".tr,
                     haveArrow: true,
                     icon: IconAssets.stars,
                     onTap: () {
-                      Get.toNamed(RouteHelper.ratings);
+                      Get.toNamed(RouteHelper.postponeAnAppointment);
                     }),
 
                 //اللغة

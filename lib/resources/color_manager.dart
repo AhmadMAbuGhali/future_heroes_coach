@@ -9,7 +9,6 @@ class ColorManager {
   static Color white = const Color(0xffffffff);
   static Color jewelryBG = const Color(0xffF1ECFC);
 
-
   static Color parent = Colors.transparent;
   static Color gray = Colors.grey;
   static Color gray666 = const Color(0xfff6f6f6);

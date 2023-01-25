@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/get_utils.dart';
 
-import '../pages/auth/cardSubscriptionType.dart';
+import 'cardSubscriptionType.dart';
 import '../resources/color_manager.dart';
 
 class SubUpgrade extends StatefulWidget {

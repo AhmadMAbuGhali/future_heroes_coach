@@ -93,8 +93,7 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                   subtitle: Text(
                     "10:30 - 11:30",
                   ),
-                  content: Text(
-                      "classTimeBody".tr),
+                  content: Text("classTimeBody".tr),
                 ))
             .toList(),
         onStepCancel: () {
@@ -136,10 +135,10 @@ class _ClassTimeWidgetState extends State<ClassTimeWidget> {
                 width: 160.w,
                 child: TextButton(
                   onPressed: () {
-                    Get.toNamed(RouteHelper.postponeAnAppointment);
+                    Get.toNamed(RouteHelper.showStudents);
                   },
                   child: Text(
-                    "requestPostponement".tr,
+                    "ShowStudents".tr,
                     style: getRegularStyle(color: ColorManager.primary),
                   ),
                   style: ElevatedButton.styleFrom(
