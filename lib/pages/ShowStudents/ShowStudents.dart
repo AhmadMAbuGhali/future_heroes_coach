@@ -9,6 +9,8 @@ import 'package:future_heroes_coach/widgets/CustomButtonPrimary.dart';
 import 'package:future_heroes_coach/widgets/CustomTextTitle.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/cardSubscriptionType.dart';
+
 class ShowStudents extends StatelessWidget {
   const ShowStudents({super.key});
 
@@ -30,7 +32,7 @@ class ShowStudents extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            Get.toNamed(RouteHelper.homeScreen);
+                            Get.toNamed(RouteHelper.initial);
                           },
                           icon: Icon(
                             Icons.arrow_back,
@@ -137,11 +139,13 @@ class ShowStudents extends StatelessWidget {
                     SvgPicture.asset(ImageAssets.Taekwondo_pictogram)
                   ]),
             ),
-            CustomButtonPrimary(
-                text: 'انتقال لتقييم الطالب',
-                onpressed: () {
-                  Get.toNamed(RouteHelper.performanceEvaluation);
-                })
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 6,
+                  itemBuilder: (context,index){
+                return CardCustomers(name: "محمد", DOB: '21/12/2007', customerImage: ImageAssets.avatar,);
+              }),
+            )
           ],
         ),
       ),

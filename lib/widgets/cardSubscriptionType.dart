@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/styles_manager.dart';
+import 'package:future_heroes_coach/routes/route_helper.dart';
 import 'package:future_heroes_coach/widgets/CustomTextTitle.dart';
+import 'package:get/get.dart';
 
-class CardSubscriptionType extends StatelessWidget {
-  String title;
-  String description;
-  String price;
-  bool isSelecte;
-  CardSubscriptionType(
+class CardCustomers extends StatelessWidget {
+  String name;
+  String DOB;
+  String customerImage;
+
+  CardCustomers(
       {super.key,
-      required this.isSelecte,
-      required this.title,
-      required this.description,
-      required this.price});
+      required this.name,
+      required this.DOB,
+      required this.customerImage});
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +24,38 @@ class CardSubscriptionType extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       margin: EdgeInsets.symmetric(vertical: 5.h),
-      decoration: !isSelecte
-          ? BoxDecoration(
-              border: Border.all(color: ColorManager.gray, width: 1),
-              color: ColorManager.white,
-              borderRadius: BorderRadius.circular(10))
-          : BoxDecoration(
-              border: Border.all(color: ColorManager.primary, width: 2),
-              color: ColorManager.white,
-              borderRadius: BorderRadius.circular(10)),
-      child: Column(
+      decoration: BoxDecoration(
+        border: Border.all(color: ColorManager.gray,width: 2),
+            borderRadius: BorderRadius.circular(15)
+      ),
+
+      child: Row(
         children: [
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomTextTitle(text: title),
-              Text(price,
-                  style: TextStyle(
-                      color: ColorManager.primary, fontWeight: FontWeight.bold))
+              CircleAvatar(radius: 40,backgroundImage: AssetImage(customerImage),),
+
+
+
             ],
           ),
-          Text(description,
-              textAlign: TextAlign.left,
-              style: getRegularStyle(color: ColorManager.gray))
+          SizedBox(width: 15.w,),
+          Column(
+            children: [
+              CustomTextTitle(text: name),
+              Text(DOB,
+                  style: TextStyle(
+                      color: ColorManager.primary, fontWeight: FontWeight.bold)),
+            ],
+          ),
+
+          Spacer(),
+          Column(
+            children: [
+              IconButton(onPressed: (){Get.toNamed(RouteHelper.performanceEvaluation);}, icon: Icon(Icons.arrow_forward))
+            ],
+          )
         ],
       ),
     );

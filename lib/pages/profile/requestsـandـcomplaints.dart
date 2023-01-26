@@ -118,7 +118,7 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                               child: Column(children: [
                             Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.7,
+                                    MediaQuery.of(context).size.height * 0.6,
                                 child: CustomComplaints()),
                             CustomButtonPrimary(
                                 text: "sendComplaint".tr,
@@ -130,7 +130,7 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                               child: Column(children: [
                             Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.7,
+                                    MediaQuery.of(context).size.height * 0.6,
                                 child: CustomRequest()),
                             CustomButtonPrimary(
                                 text: 'sendRequest'.tr,
