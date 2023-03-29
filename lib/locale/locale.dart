@@ -211,6 +211,11 @@ class MyLocale extends Translations {
           "NameOfStudent": "يوسف نعمان الجزار",
           "Submitevaluation": "ارسال التقييم",
           "AttendanceRecording": "تسجيل الحضور",
+          "passwordEmpty": "كلمة المرور مطلوبة",
+          "emailEmpty": "البريد الالكتروني مطلوب",
+          "name": "الإسم : ",
+          "class": "الحصة : ",
+          "classtime": "مدة الحصة : ",
           "": "",
         },
         "en": {
@@ -422,7 +427,12 @@ class MyLocale extends Translations {
           "PerformanceAppraisal": "Performance appraisal in the class",
           "NameOfStudent": "Yousef Numan Aljazzar",
           "Submitevaluation": "Submit Evaluation",
-          "AttendanceRecording": "Attendance Recording"
+          "AttendanceRecording": "Attendance Recording",
+          "passwordEmpty": "Password is required",
+          "emailEmpty": "Email is required",
+          "name": "Name : ",
+          "class": "Class :",
+          "classtime": "class Time : ",
         }
       };
 }

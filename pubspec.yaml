@@ -53,11 +53,30 @@ dependencies:
   dropdown_button2: ^1.9.2
   easy_localization: ^3.0.1
   get_storage: ^2.0.3
+  http: ^0.13.5
+  dio: ^4.0.6
+  string_validator: ^0.3.0
+  provider: ^6.0.5
+  flutter_html: ^3.0.0-alpha.3
+  sms_autofill: ^2.3.0
+  lottie: ^2.2.0
+  get_it: ^7.2.0
+
+
+
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.1
+
+flutter_icons:
+  image_path_android: "assets/images/logoapp.png"
+  image_path_ios: "assets/images/logoapp.png"
+  android: true
+  ios: true
+  remove_alpha_ios: true
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/styles_manager.dart';
 import 'package:future_heroes_coach/widgets/class_time_widget.dart';
+import 'package:future_heroes_coach/widgets/dateWidget.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var numberOfDone = 3;
-
+  bool isExpanded = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,11 +84,32 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 230.h,
-            left: 20,
-            right: 20,
-            child: ClassTimeWidget(),
-          ),
+              top: 300.h,
+              left: 20,
+              right: 20,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    DateWidget(
+                      time: DateTime.now(),
+                      date: DateTime.now(),
+                      name: 'يوسف الجزار',
+                      duration: 60,
+                      type: 'تايكواندو',
+                      onTap: () {},
+                    ),
+                    DateWidget(
+                      time: DateTime.now(),
+                      date: DateTime.now(),
+                      name: 'يوسف الجزار',
+                      duration: 60,
+                      type: 'تايكواندو',
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              )),
         ],
       ),
     );
