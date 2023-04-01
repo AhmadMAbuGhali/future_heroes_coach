@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_coach/data/api/api_client.dart';
+import 'package:future_heroes_coach/models/MyStudent_model.dart';
 import 'package:future_heroes_coach/models/class_time_model.dart';
 import 'package:future_heroes_coach/models/complaint_replay.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
@@ -20,10 +21,10 @@ import 'auth_provider.dart';
 
 class AppProvider extends ChangeNotifier {
   AppProvider() {
+    getProfileData();
     getComplaintReplay();
     getOrderReplay();
     getClassTime();
-    getProfileData();
   }
 
   int? _id;
@@ -65,6 +66,12 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  logOut() {
+    getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
+    getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
+    clearAllData();
+  }
+
   changeShowConfPasswordAuth() {
     showConfPasswordAuth = !showConfPasswordAuth;
     notifyListeners();
@@ -78,6 +85,8 @@ class AppProvider extends ChangeNotifier {
 
       getIt<SharedPreferenceHelper>()
           .setDOB(dob: profileData!.dateOfBirth.toString());
+      getIt<SharedPreferenceHelper>()
+          .setPhone(phone: profileData!.phoneNumber.toString());
       print(profileData!.email.toString());
       notifyListeners();
     } on DioError catch (e) {
@@ -246,9 +255,44 @@ class AppProvider extends ChangeNotifier {
   }
 
   List<ClassTime> classTime = [];
+
   Future<ClassTime?> getClassTime() async {
     try {
       classTime = await DioClient.dioClient.getLecture();
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+// My Student
+  List<MyStudentModel> studentModel = [];
+  Future<MyStudentModel?> getStudentsClass(int classId) async {
+    try {
+      studentModel = await DioClient.dioClient.getStudentsClass(classId);
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  Future<File?> updateImage(File image) async {
+    try {
+      await DioClient.dioClient.updateImage(image);
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -283,12 +327,6 @@ class AppProvider extends ChangeNotifier {
   changeFirstTime(bool value) {
     firstTime = value;
     notifyListeners();
-  }
-
-  logOut() {
-    getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
-    getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
-    clearAllData();
   }
 
   clearAllData() {

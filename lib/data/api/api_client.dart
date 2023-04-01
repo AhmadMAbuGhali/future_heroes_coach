@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/main.dart';
+import 'package:future_heroes_coach/models/MyStudent_model.dart';
 import 'package:future_heroes_coach/models/complaint_replay.dart';
 import 'package:future_heroes_coach/models/login_model.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
@@ -42,32 +43,6 @@ class DioClient {
     } catch (error) {
       rethrow;
     }
-  }
-
-  //subCategory
-  Future<List<SubCategory>> getSubCategory() async {
-    Response response = await dio!.get(ApiConstant.subCategory,
-        options: Options(
-          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
-        ));
-    List<SubCategory> listcat = [];
-    listcat =
-        (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
-
-    return listcat;
-  }
-
-  Future<List<SubCategory>> getSubCategorysForCategor(int id) async {
-    Response response = await dio!.get(ApiConstant.getSubCategorysForCategor,
-        queryParameters: {"id": id},
-        options: Options(
-          headers: {"Accept-Language": shaedpref.getString("curruntLang")},
-        ));
-    List<SubCategory> listsubcatforcat = [];
-    listsubcatforcat =
-        (response.data as List).map((e) => SubCategory.fromJson(e)).toList();
-
-    return listsubcatforcat;
   }
 
   Future<List<TimeList>> getTimeList(String emailUser) async {
@@ -235,7 +210,7 @@ class DioClient {
 
   Future<bool?> getIsActive() async {
     await dio!.get(
-      ApiConstant.isActiveStatus!,
+      ApiConstant.isActiveStatus,
       options: Options(
         headers: {
           "Accept-Language": shaedpref.getString("curruntLang"),
@@ -248,7 +223,7 @@ class DioClient {
 
   Future<List<ClassTime>> getLecture() async {
     Response response = await dio!.get(
-      ApiConstant.getUserPresenceAsync,
+      ApiConstant.CoachSchedule,
       options: Options(
         headers: {
           "Accept-Language": shaedpref.getString("curruntLang"),
@@ -260,7 +235,7 @@ class DioClient {
     List<ClassTime> classTime = [];
     classTime =
         (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
-    print('listcat.length');
+
     print(classTime.length);
     return classTime;
   }
@@ -272,6 +247,16 @@ class DioClient {
     ResponsMassageCode responseMassage =
         ResponsMassageCode.fromJson(response.data);
     return responseMassage;
+  }
+
+  Future<List<MyStudentModel>> getStudentsClass(int classId) async {
+    Response response = await dio!
+        .get(ApiConstant.studentsClass, queryParameters: {"classId": classId});
+    List<MyStudentModel> myStudentModel = [];
+
+    myStudentModel =
+        (response.data as List).map((e) => MyStudentModel.fromJson(e)).toList();
+    return myStudentModel;
   }
 
   Future<ResponsMassageCode?> verifyResetSendCode(
@@ -290,6 +275,15 @@ class DioClient {
     ResponsMassageCode responseMassage =
         ResponsMassageCode.fromJson(response.data);
     return responseMassage;
+  }
+
+  Future<void> updateImage(File image) async {
+    FormData formData = FormData.fromMap({
+      "ImageFile":
+          await MultipartFile.fromFile(image.path, filename: image.path),
+    });
+    Response response =
+        await dio!.put(ApiConstant.updateImageProfile, data: formData);
   }
 
   Future<ResponsMassageCode?> resetPassword(

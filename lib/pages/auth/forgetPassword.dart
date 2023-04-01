@@ -37,18 +37,20 @@ class ForgetPassword extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                CustomTextTitle(
-                  text: 'didYouForgotPassword'.tr,
+                Center(
+                  child: CustomTextTitle(
+                    text: 'didYouForgotPassword'.tr,
+                  ),
                 ),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: 50.h,
                 ),
                 Text(
                   'email'.tr,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 10.h,
                 ),
                 CustomTextFormAuth(
                   hidepassword: false,
@@ -70,9 +72,9 @@ class ForgetPassword extends StatelessWidget {
                   //  iconData: Icons.email_outlined,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: double.infinity,
                   height: 44.h,
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  //   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: ColorManager.primary, // Background color

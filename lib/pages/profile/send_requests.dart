@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/services/auth_provider.dart';
 import 'package:future_heroes_coach/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_coach/widgets/CustomTextTitle.dart';
 
@@ -35,7 +36,9 @@ class SendRequests extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  await provider.getComplaintReplay();
+                                  await provider.getOrderReplay();
                                   Get.back();
                                 },
                                 icon: Icon(
@@ -72,6 +75,7 @@ class SendRequests extends StatelessWidget {
                       hidepassword: false,
                       textInputType: TextInputType.text,
                       myController: titleController,
+                      validator: (value) {},
                       hintText: 'AddressHint'.tr),
                   SizedBox(
                     height: 10.h,
@@ -122,6 +126,8 @@ class SendRequests extends StatelessWidget {
                   CustomButtonPrimary(
                       text: "sendRequest".tr,
                       onpressed: () {
+                        provider.getComplaintReplay();
+                        provider.getOrderReplay();
                         provider.postOrder(titleController.text.trim(),
                             subjectController.text.trim());
 

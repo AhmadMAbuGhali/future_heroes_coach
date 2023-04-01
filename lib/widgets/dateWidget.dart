@@ -4,20 +4,22 @@ import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:get/get.dart';
 
 class DateWidget extends StatefulWidget {
-  DateTime? date;
-  DateTime? time;
-  String? name;
+  String? date;
+  String? timeStart;
+  String? timeEnd;
+
   String? type;
-  int? duration;
-  Function()? onTap;
+
+  Function()? onTapReq;
+  Function()? onTapShow;
   DateWidget(
       {super.key,
       this.date,
-      this.time,
-      this.name,
+      this.timeStart,
+      this.timeEnd,
       this.type,
-      this.duration,
-      this.onTap});
+      this.onTapReq,
+      this.onTapShow});
 
   @override
   State<DateWidget> createState() => _DateWidgetState();
@@ -38,7 +40,7 @@ class _DateWidgetState extends State<DateWidget> {
             child: Column(
               children: [
                 Container(
-                  height: 80.h,
+                  height: 90.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: ColorManager.primary),
@@ -55,18 +57,35 @@ class _DateWidgetState extends State<DateWidget> {
                           width: 10.w,
                         ),
                         Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               widget.date.toString(),
+                              textAlign: TextAlign.start,
                               style: TextStyle(
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              widget.time.toString(),
-                              style: TextStyle(
-                                  color: ColorManager.gray,
-                                  fontWeight: FontWeight.normal),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  widget.timeStart.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                Text(" --> "),
+                                Text(
+                                  widget.timeEnd.toString(),
+                                  style: TextStyle(
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -120,27 +139,32 @@ class _DateWidgetState extends State<DateWidget> {
                                   color: ColorManager.primary,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              widget.time.toString(),
-                              style: TextStyle(
-                                  color: ColorManager.gray,
-                                  fontWeight: FontWeight.normal),
+                            SizedBox(
+                              height: 7.h,
                             ),
                             Row(
                               children: [
                                 Text(
-                                  'name'.tr,
+                                  widget.timeStart.toString(),
                                   style: TextStyle(
-                                      color: ColorManager.primary,
-                                      fontWeight: FontWeight.bold),
+                                      color: ColorManager.gray,
+                                      fontWeight: FontWeight.normal),
                                 ),
+                                Text(" --> "),
                                 Text(
-                                  widget.name.toString(),
+                                  widget.timeEnd.toString(),
                                   style: TextStyle(
                                       color: ColorManager.gray,
                                       fontWeight: FontWeight.normal),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              height: 7.h,
+                            ),
+
+                            SizedBox(
+                              height: 7.h,
                             ),
                             Row(
                               children: [
@@ -158,51 +182,76 @@ class _DateWidgetState extends State<DateWidget> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 7.h,
+                            ),
+
                             Row(
                               children: [
-                                Text(
-                                  'classtime'.tr,
-                                  style: TextStyle(
-                                      color: ColorManager.primary,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  child: ElevatedButton(
+                                    onPressed: widget.onTapShow,
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: ColorManager.primary,
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10.h),
+                                      primary: ColorManager.primary,
+                                      textStyle: TextStyle(
+                                        fontFamily: 'DroidKufi',
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                    child: Container(
+                                      width: 100.w,
+                                      padding: EdgeInsets.all(6),
+                                      child: Center(
+                                        child: Text(
+                                          'ShowStudents'.tr,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: ColorManager.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  widget.duration.toString(),
-                                  style: TextStyle(
-                                      color: ColorManager.gray,
-                                      fontWeight: FontWeight.normal),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Container(
+                                  child: ElevatedButton(
+                                    onPressed: widget.onTapReq,
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: ColorManager.white,
+                                      side: BorderSide(
+                                          color: ColorManager.primary),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10.h),
+                                      primary: ColorManager.white,
+                                      textStyle: TextStyle(
+                                        fontFamily: 'DroidKufi',
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                    child: Container(
+                                      width: 100.w,
+                                      padding: EdgeInsets.all(6),
+                                      child: Center(
+                                        child: Text(
+                                          'requestPostponement'.tr,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: ColorManager.primary),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                            Container(
-                              //   padding: EdgeInsets.all(8),
-                              // width: 100,
-                              //   margin: EdgeInsets.all(10),
-                              child: ElevatedButton(
-                                onPressed: widget.onTap,
-                                child: Container(
-                                  padding: EdgeInsets.all(6),
-                                  child: Text(
-                                    'requestPostponement'.tr,
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: ColorManager.primary),
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  // shape: RoundedRectangleBorder(
-                                  //     borderRadius:
-                                  //         BorderRadius.circular(10.r)),
-                                  foregroundColor: ColorManager.white,
-                                  side: BorderSide(color: ColorManager.primary),
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                                  primary: ColorManager.white,
-                                  textStyle: TextStyle(
-                                    fontFamily: 'DroidKufi',
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ),
+
+                            SizedBox(
+                              height: 5.h,
                             )
                             //    CustomButtonPrimary(
                             //   onpressed: () {},
@@ -222,7 +271,7 @@ class _DateWidgetState extends State<DateWidget> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20.h,
                 ),
               ],
             ),

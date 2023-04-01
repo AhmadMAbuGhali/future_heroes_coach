@@ -9,8 +9,7 @@ class ApiConstant {
       'Authentication/CreateRespationUser';
   static const String getAllRespationUsers =
       'Authentication/GetAllRespationUsers';
-  static const String getUserPresenceAsync =
-      'Authentication/GetUserPresenceAsync';
+  static const String CoachSchedule = 'Class/CoachSchedule';
   static const String disease = 'Disease';
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
@@ -37,6 +36,8 @@ class ApiConstant {
   static const String resetPassword = 'Authentication/ResetPassword';
   static const String resetPasswordAuthorize =
       'Authentication/ResetPasswordAuthorize';
-  static const String getProfileData = '/Authentication/UserProfileGetAsync';
+  static const String getProfileData = 'Authentication/CoachProfile';
+  static const String studentsClass = 'Class/StudentsClass';
   static const String imageURL = 'https://yousef.azurewebsites.net/images/';
+  static const String updateImageProfile = 'Authentication/UpdateImageProfile';
 }

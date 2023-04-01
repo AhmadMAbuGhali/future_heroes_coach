@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/services/auth_provider.dart';
 import 'package:future_heroes_coach/widgets/CustomTextFormAuth.dart';
 import 'package:future_heroes_coach/widgets/CustomTextTitle.dart';
 
@@ -38,7 +39,9 @@ class SendComplaints extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  await provider.getComplaintReplay();
+                                  await provider.getOrderReplay();
                                   Get.back();
                                 },
                                 icon: Icon(
@@ -75,6 +78,7 @@ class SendComplaints extends StatelessWidget {
                       hidepassword: false,
                       textInputType: TextInputType.text,
                       myController: titleController,
+                      validator: (value) {},
                       hintText: 'AddressHint'.tr),
                   SizedBox(
                     height: 10.h,
@@ -125,6 +129,9 @@ class SendComplaints extends StatelessWidget {
                   CustomButtonPrimary(
                       text: "sendComplaint".tr,
                       onpressed: () {
+                        provider.getComplaintReplay();
+                        provider.getOrderReplay();
+
                         print(titleController.text.trim());
                         print(subjectController.text.trim());
                         print({getIt<SharedPreferenceHelper>().getUserToken()});

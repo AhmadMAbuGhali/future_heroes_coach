@@ -145,7 +145,7 @@ class Login extends StatelessWidget {
                             snakbarWidget(
                               context,
                               Titel: 'dataErorr'.tr,
-                              Description: 'Make sure that Data is Good'.tr,
+                              Description: 'dataErorrDetails'.tr,
                             ).error();
                           }
                         } else {

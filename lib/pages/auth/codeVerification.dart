@@ -68,10 +68,14 @@ class _CodeVerificationState extends State<CodeVerification> {
               SizedBox(
                 height: 15.h,
               ),
-              Text(
-                '${provider.emailSendCodeController.text.trim().substring(0, 3)}*******.com',
-                style: getMediumStyle(
-                    color: ColorManager.black, fontSize: FontSize.s14.sp),
+              Center(
+                child: Text(provider.emailSendCodeController.text.trim()),
+                // child: Text(
+                //   '${provider.emailSendCodeController.text.trim().substring(0, 3)}******* ' +
+                //       '${provider.emailSendCodeController.text.trim().substring(provider.emailSendCodeController.text.trim().length - 7)}',
+                //   style: getMediumStyle(
+                //       color: ColorManager.black, fontSize: FontSize.s14.sp),
+                // ),
               ),
               SizedBox(
                 height: 30.h,
@@ -100,21 +104,23 @@ class _CodeVerificationState extends State<CodeVerification> {
                   },
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(Trans('sendCodeAgain').tr),
-                  Text(
-                    "$_start",
-                    style: TextStyle(color: ColorManager.primary),
-                  ),
-                  Text(Trans("seconds").tr),
-                ],
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text(Trans('sendCodeAgain').tr),
+              //     Text(
+              //       "$_start",
+              //       style: TextStyle(color: ColorManager.primary),
+              //     ),
+              //     Text(Trans("seconds").tr),
+              //   ],
+              // ),
+              SizedBox(
+                height: 70.h,
               ),
               Container(
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
                 height: 44.h,
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: ColorManager.primary, // Background color

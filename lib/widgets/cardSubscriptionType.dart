@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/styles_manager.dart';
@@ -25,35 +26,41 @@ class CardCustomers extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       margin: EdgeInsets.symmetric(vertical: 5.h),
       decoration: BoxDecoration(
-        border: Border.all(color: ColorManager.gray,width: 2),
-            borderRadius: BorderRadius.circular(15)
-      ),
-
+          border: Border.all(color: ColorManager.gray, width: 2),
+          borderRadius: BorderRadius.circular(15)),
       child: Row(
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(radius: 40,backgroundImage: AssetImage(customerImage),),
-
-
-
+              CircleAvatar(
+                radius: 40,
+                backgroundImage:
+                    Image.network(ApiConstant.imageURL + customerImage).image,
+              ),
             ],
           ),
-          SizedBox(width: 15.w,),
-          Column(
-            children: [
-              CustomTextTitle(text: name),
-              Text(DOB,
-                  style: TextStyle(
-                      color: ColorManager.primary, fontWeight: FontWeight.bold)),
-            ],
+          SizedBox(
+            width: 15.w,
           ),
-
+          InkWell(
+            child: Column(
+              children: [
+                Text(name),
+                Text(DOB,
+                    style: TextStyle(
+                        color: ColorManager.primary,
+                        fontWeight: FontWeight.normal)),
+              ],
+            ),
+            onTap: () {
+              Get.toNamed(RouteHelper.performanceEvaluation);
+            },
+          ),
           Spacer(),
           Column(
             children: [
-              IconButton(onPressed: (){Get.toNamed(RouteHelper.performanceEvaluation);}, icon: Icon(Icons.arrow_forward))
+              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
             ],
           )
         ],

@@ -46,6 +46,8 @@ class SuccessLogin extends StatelessWidget {
               CustomButtonPrimary(
                 text: 'goToHome'.tr,
                 onpressed: () {
+                  provider.getComplaintReplay();
+                  provider.getOrderReplay();
                   provider.getProfileData();
                   Get.offNamed(RouteHelper.initial);
                 },
