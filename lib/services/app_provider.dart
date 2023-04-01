@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_coach/data/api/api_client.dart';
 import 'package:future_heroes_coach/models/MyStudent_model.dart';
+import 'package:future_heroes_coach/models/StandardRateModel.dart';
 import 'package:future_heroes_coach/models/class_time_model.dart';
 import 'package:future_heroes_coach/models/complaint_replay.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
@@ -25,6 +26,7 @@ class AppProvider extends ChangeNotifier {
     getComplaintReplay();
     getOrderReplay();
     getClassTime();
+    getStandardRate();
   }
 
   int? _id;
@@ -47,7 +49,7 @@ class AppProvider extends ChangeNotifier {
   File? imageFileNull;
 
   profile_model? profileData;
-
+  StandardRateModel? standardRateModel;
   TextEditingController oldPass = TextEditingController();
   TextEditingController newPass = TextEditingController();
   TextEditingController confPass = TextEditingController();
@@ -278,6 +280,27 @@ class AppProvider extends ChangeNotifier {
     try {
       studentModel = await DioClient.dioClient.getStudentsClass(classId);
     } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+
+  List<StandardRateModel> standardRate = [];
+
+  Future<StandardRateModel?> getStandardRate() async {
+    try {
+      standardRate = await DioClient.dioClient.getStandardRate();
+      print(standardRate.length);
+      print(standardRate[1].name);
+    } on DioError catch (e) {
+      print('object');
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/styles_manager.dart';
@@ -49,9 +50,28 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 40.h,
                       ),
-                      Image.asset(
-                        ImageAssets.avatar,
-                        width: 100,
+                      CircleAvatar(
+                        radius: 50.r,
+                        foregroundImage:
+                            provider.profileData!.imageString == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : Image.network(
+                                    ApiConstant.imageURL +
+                                        provider.profileData!.imageString!,
+                                    fit: BoxFit.cover,
+                                  ).image,
+                        backgroundImage:
+                            provider.profileData!.imageString == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : Image.network(
+                                    ApiConstant.imageURL +
+                                        provider.profileData!.imageString!,
+                                    fit: BoxFit.cover,
+                                  ).image,
                       ),
                       SizedBox(
                         height: 10.h,

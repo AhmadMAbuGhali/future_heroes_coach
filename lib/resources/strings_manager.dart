@@ -1,6 +1,7 @@
+class AppStrings {
+  static const ar = "ar";
+  static const en = "en";
 
-class AppStrings{
   static const signIn = "تسجيل الدخول";
   static const signUp = 'إنشاء حساب جديد';
 }
-

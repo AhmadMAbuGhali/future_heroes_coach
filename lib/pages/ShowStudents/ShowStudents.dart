@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/styles_manager.dart';
@@ -68,7 +69,10 @@ class ShowStudents extends StatelessWidget {
                         //  mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            provider.classTime[1].id.toString() ?? '',
+                            'class'.tr +
+                                    provider.classTime[1].department
+                                        .toString() ??
+                                '',
                             style: TextStyle(
                                 color: ColorManager.white,
                                 fontWeight: FontWeight.bold),
@@ -82,7 +86,7 @@ class ShowStudents extends StatelessWidget {
                                     color: ColorManager.gray,
                                   ),
                                   Text(
-                                    '13-01-2023',
+                                    provider.classTime[0].dayAsString ?? '',
                                     style: TextStyle(
                                       color: ColorManager.white,
                                     ),
@@ -111,14 +115,38 @@ class ShowStudents extends StatelessWidget {
                           Row(
                             children: [
                               CircleAvatar(
-                                child: Image.asset(
-                                  ImageAssets.avatar,
-                                ),
+                                foregroundImage:
+                                    provider.profileData!.imageString == null
+                                        ? Image.asset(
+                                            ImageAssets.avatar,
+                                          ).image
+                                        : Image.network(
+                                            ApiConstant.imageURL +
+                                                provider
+                                                    .profileData!.imageString!,
+                                            fit: BoxFit.cover,
+                                          ).image,
+                                backgroundImage:
+                                    provider.profileData!.imageString == null
+                                        ? Image.asset(
+                                            ImageAssets.avatar,
+                                          ).image
+                                        : Image.network(
+                                            ApiConstant.imageURL +
+                                                provider
+                                                    .profileData!.imageString!,
+                                            fit: BoxFit.cover,
+                                          ).image,
+                              ),
+                              SizedBox(
+                                width: 16.w,
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10.w, vertical: 5.h),
+                                    horizontal: 10.w, vertical: 10.h),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
                                       provider.profileData!.fullName ?? '',
@@ -127,7 +155,7 @@ class ShowStudents extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      provider.classTime[0].department ?? '',
+                                      provider.profileData!.email ?? '',
                                       style: TextStyle(
                                         color: ColorManager.white,
                                       ),
@@ -139,7 +167,31 @@ class ShowStudents extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SvgPicture.asset(ImageAssets.Taekwondo_pictogram)
+                      CircleAvatar(
+                        radius: 40.r,
+                        foregroundImage:
+                            provider.profileData!.imageStringSubCatogrey == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : Image.network(
+                                    ApiConstant.imageURL +
+                                        provider.profileData!
+                                            .imageStringSubCatogrey!,
+                                    fit: BoxFit.cover,
+                                  ).image,
+                        backgroundImage:
+                            provider.profileData!.imageStringSubCatogrey == null
+                                ? Image.asset(
+                                    ImageAssets.avatar,
+                                  ).image
+                                : Image.network(
+                                    ApiConstant.imageURL +
+                                        provider.profileData!
+                                            .imageStringSubCatogrey!,
+                                    fit: BoxFit.cover,
+                                  ).image,
+                      ),
                     ]),
               ),
               Expanded(
@@ -151,6 +203,10 @@ class ShowStudents extends StatelessWidget {
                         DOB: provider.studentModel[index].membershipNo ?? '',
                         customerImage:
                             provider.studentModel[index].imageString ?? '',
+                        ontap: () {
+                          provider.getStandardRate();
+                          Get.toNamed(RouteHelper.performanceEvaluation);
+                        },
                       );
                     }),
               )

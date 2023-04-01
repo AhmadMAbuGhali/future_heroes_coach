@@ -12,12 +12,13 @@ class CardCustomers extends StatelessWidget {
   String name;
   String DOB;
   String customerImage;
-
+  Function()? ontap;
   CardCustomers(
       {super.key,
       required this.name,
       required this.DOB,
-      required this.customerImage});
+      required this.customerImage,
+      required this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +45,16 @@ class CardCustomers extends StatelessWidget {
             width: 15.w,
           ),
           InkWell(
-            child: Column(
-              children: [
-                Text(name),
-                Text(DOB,
-                    style: TextStyle(
-                        color: ColorManager.primary,
-                        fontWeight: FontWeight.normal)),
-              ],
-            ),
-            onTap: () {
-              Get.toNamed(RouteHelper.performanceEvaluation);
-            },
-          ),
+              child: Column(
+                children: [
+                  Text(name),
+                  Text(DOB,
+                      style: TextStyle(
+                          color: ColorManager.primary,
+                          fontWeight: FontWeight.normal)),
+                ],
+              ),
+              onTap: ontap),
           Spacer(),
           Column(
             children: [

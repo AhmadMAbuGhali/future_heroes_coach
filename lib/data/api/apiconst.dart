@@ -40,4 +40,5 @@ class ApiConstant {
   static const String studentsClass = 'Class/StudentsClass';
   static const String imageURL = 'https://yousef.azurewebsites.net/images/';
   static const String updateImageProfile = 'Authentication/UpdateImageProfile';
+  static const String getstandardRate = 'Standard/model';
 }

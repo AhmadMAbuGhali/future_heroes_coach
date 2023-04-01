@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/main.dart';
 import 'package:future_heroes_coach/models/MyStudent_model.dart';
+import 'package:future_heroes_coach/models/StandardRateModel.dart';
 import 'package:future_heroes_coach/models/complaint_replay.dart';
 import 'package:future_heroes_coach/models/login_model.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
@@ -257,6 +258,22 @@ class DioClient {
     myStudentModel =
         (response.data as List).map((e) => MyStudentModel.fromJson(e)).toList();
     return myStudentModel;
+  }
+
+  Future<List<StandardRateModel>> getStandardRate() async {
+    Response response = await dio!.get(ApiConstant.getstandardRate,
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+    List<StandardRateModel> standardRate = [];
+    standardRate = (response.data as List)
+        .map((e) => StandardRateModel.fromJson(e))
+        .toList();
+    return standardRate;
   }
 
   Future<ResponsMassageCode?> verifyResetSendCode(
