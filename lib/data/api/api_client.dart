@@ -294,13 +294,24 @@ class DioClient {
     return responseMassage;
   }
 
-  Future<void> updateImage(File image) async {
-    FormData formData = FormData.fromMap({
-      "ImageFile":
-          await MultipartFile.fromFile(image.path, filename: image.path),
-    });
-    Response response =
-        await dio!.put(ApiConstant.updateImageProfile, data: formData);
+  Future<File?> updateImage(File image) async {
+    try {
+      FormData formData = FormData.fromMap({
+        "ImageFile":
+            await MultipartFile.fromFile(image.path, filename: image.path),
+      });
+      await dio!.put(ApiConstant.updateImageProfile,
+          data: formData,
+          options: Options(
+            headers: {
+              "Accept-Language": shaedpref.getString("curruntLang"),
+              'Authorization':
+                  'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+            },
+          ));
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future<ResponsMassageCode?> resetPassword(

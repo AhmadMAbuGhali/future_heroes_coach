@@ -83,18 +83,18 @@ class _ClassTimeState extends State<ClassTime> {
                       itemCount: provider.classTime.length,
                       itemBuilder: (context, index) {
                         return DateWidget(
-                          timeStart: provider.classTime[index]!.startClass,
-                          timeEnd: provider.classTime[index]!.endClass,
-                          date: provider.classTime[index]!.dayAsString,
-                          type: provider.classTime[index]!.department,
+                          timeStart: provider.classTime[index].startClass,
+                          timeEnd: provider.classTime[index].endClass,
+                          date: provider.classTime[index].dayAsString,
+                          type: provider.classTime[index].department,
                           onTapReq: () {
-                            provider.setId(provider.classTime[index]!.id!);
-                            print(provider.id);
+                            provider.setId(provider.classTime[index].id!);
+
                             Get.toNamed(RouteHelper.postponeAnAppointment);
                           },
                           onTapShow: () {
-                            provider.setId(provider.classTime[index]!.id!);
-                            print(provider.id);
+                            provider.setId(provider.classTime[index].id!);
+
                             Get.toNamed(RouteHelper.showStudents);
                           },
                         );

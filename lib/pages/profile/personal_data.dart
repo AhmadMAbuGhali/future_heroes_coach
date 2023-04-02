@@ -99,23 +99,33 @@ class _PersonalDataState extends State<PersonalData> {
                                       ? Image.asset(
                                           ImageAssets.avatar,
                                         ).image
-                                      : Image.network(
-                                          ApiConstant.imageURL +
-                                              provider
-                                                  .profileData!.imageString!,
-                                          fit: BoxFit.cover,
-                                        ).image,
+                                      : provider.imageFile == null
+                                          ? Image.network(
+                                              ApiConstant.imageURL +
+                                                  provider.profileData!
+                                                      .imageString!,
+                                              fit: BoxFit.cover,
+                                            ).image
+                                          : Image.file(
+                                              provider.imageFile!,
+                                              fit: BoxFit.cover,
+                                            ).image,
                               backgroundImage:
                                   provider.profileData!.imageString == null
                                       ? Image.asset(
                                           ImageAssets.avatar,
                                         ).image
-                                      : Image.network(
-                                          ApiConstant.imageURL +
-                                              provider
-                                                  .profileData!.imageString!,
-                                          fit: BoxFit.cover,
-                                        ).image,
+                                      : provider.imageFile == null
+                                          ? Image.network(
+                                              ApiConstant.imageURL +
+                                                  provider.profileData!
+                                                      .imageString!,
+                                              fit: BoxFit.cover,
+                                            ).image
+                                          : Image.file(
+                                              provider.imageFile!,
+                                              fit: BoxFit.cover,
+                                            ).image,
                             ),
                             Positioned(
                                 bottom: -10.h,
@@ -239,9 +249,8 @@ class _PersonalDataState extends State<PersonalData> {
                           children: [
                             Text(
                               provider.profileData!.dateOfBirth!
-                                      .split("T")
-                                      .first ??
-                                  "",
+                                  .split("T")
+                                  .first,
                               style: getRegularStyle(color: ColorManager.gray),
                             ),
                           ],
@@ -299,9 +308,14 @@ class _PersonalDataState extends State<PersonalData> {
                   ),
                   CustomButtonPrimary(
                     text: "save".tr,
-                    onpressed: () {
-                      provider.updateImage(imageFile!);
-                      print(imageFile.toString());
+                    onpressed: () async {
+                      try {
+                        await provider.updateImage(provider.imageFile!);
+                        print("Joe");
+                        print(provider.imageFile!.path);
+                      } catch (e) {
+                        print(e.toString());
+                      }
                     },
                   ),
                 ],
@@ -342,55 +356,38 @@ class _PersonalDataState extends State<PersonalData> {
   }
 
   Widget bottomSheet() {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 200.h,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(
-            'changePhoto'.tr,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromCamera();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openCamera'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return Container(
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
+        height: 220.h,
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Text(
+              'changePhoto'.tr,
             ),
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          Text('or'.tr),
-          SizedBox(
-            height: 7.h,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromGallery();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openGallery'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
+            SizedBox(
+              height: 20,
             ),
-          ),
-        ],
-      ),
-    );
+            CustomButtonPrimary(
+                text: "openCamera".tr,
+                onpressed: () {
+                  provider.openCamera(context);
+                }),
+            SizedBox(
+              height: 10.h,
+            ),
+            Text("or".tr),
+            CustomButtonPrimary(
+                text: "openGallery".tr,
+                onpressed: () {
+                  provider.openGallery(context);
+                }),
+          ],
+        ),
+      );
+    });
   }
 }

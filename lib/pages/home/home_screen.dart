@@ -77,8 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 10.h,
                       ),
                       Text(
-                        "homeTopText1".tr + provider.profileData!.fullName! ??
-                            "",
+                        "homeTopText1".tr + provider.profileData!.fullName!,
                         style: getRegularStyle(color: ColorManager.white),
                       ),
                       SizedBox(
@@ -125,12 +124,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: provider.classTime.length,
                           itemBuilder: (context, index) {
                             return DateWidget(
-                              timeStart: provider.classTime[index]!.startClass,
-                              timeEnd: provider.classTime[index]!.endClass,
-                              date: provider.classTime[index]!.dayAsString,
-                              type: provider.classTime[index]!.department,
+                              timeStart: provider.classTime[index].startClass,
+                              timeEnd: provider.classTime[index].endClass,
+                              date: provider.classTime[index].dayAsString,
+                              type: provider.classTime[index].department,
                               onTapReq: () {
-                                provider.setId(provider.classTime[index]!.id!);
+                                provider.setId(provider.classTime[index].id!);
                                 print(provider.id);
                                 Get.toNamed(RouteHelper.postponeAnAppointment);
                               },

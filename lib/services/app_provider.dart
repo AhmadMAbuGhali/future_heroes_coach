@@ -89,7 +89,6 @@ class AppProvider extends ChangeNotifier {
           .setDOB(dob: profileData!.dateOfBirth.toString());
       getIt<SharedPreferenceHelper>()
           .setPhone(phone: profileData!.phoneNumber.toString());
-      print(profileData!.email.toString());
       notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
@@ -115,6 +114,7 @@ class AppProvider extends ChangeNotifier {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       this.imageFile = imageTemp;
+      updateImage(imageTemp);
       notifyListeners();
     }
   }
@@ -140,6 +140,8 @@ class AppProvider extends ChangeNotifier {
       // File imageFile = File(pickedFile.path);
       final imageTemp = File(pickedFile.path);
       this.imageFile = imageTemp;
+      updateImage(imageTemp);
+
       notifyListeners();
     }
   }
@@ -313,9 +315,11 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<File?> updateImage(File image) async {
+  Future<String?> updateImage(File image) async {
     try {
       await DioClient.dioClient.updateImage(image);
+      print("Done");
+      notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -354,7 +358,10 @@ class AppProvider extends ChangeNotifier {
 
   clearAllData() {
     getIt<AuthProvider>().listTime = [];
+    getIt<SharedPreferenceHelper>().setEmail(email: '');
 
+    getIt<SharedPreferenceHelper>().setDOB(dob: '');
+    getIt<SharedPreferenceHelper>().setPhone(phone: '');
     getIt<AuthProvider>().coachFromId = []; // نشطة
 
     getIt<AuthProvider>().timeId = [];

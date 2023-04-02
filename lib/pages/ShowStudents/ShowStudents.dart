@@ -70,9 +70,7 @@ class ShowStudents extends StatelessWidget {
                         children: [
                           Text(
                             'class'.tr +
-                                    provider.classTime[1].department
-                                        .toString() ??
-                                '',
+                                provider.classTime[1].department.toString(),
                             style: TextStyle(
                                 color: ColorManager.white,
                                 fontWeight: FontWeight.bold),
