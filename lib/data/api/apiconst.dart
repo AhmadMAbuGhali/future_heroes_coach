@@ -5,6 +5,8 @@ class ApiConstant {
   static const String completeProfile = 'Authentication/CompleteProfile';
   static const String createCoach = 'Authentication/CreateCoach';
   static const String getAllCoaches = 'Authentication/GetAllCoaches';
+  static const String userNotification = 'Notification/UserNotification';
+
   static const String createRespationUser =
       'Authentication/CreateRespationUser';
   static const String getAllRespationUsers =

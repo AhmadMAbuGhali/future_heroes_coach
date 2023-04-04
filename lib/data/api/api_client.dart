@@ -13,6 +13,7 @@ import 'package:future_heroes_coach/models/profile_data.dart';
 import 'package:future_heroes_coach/models/time_list.dart';
 
 import '../../models/class_time_model.dart';
+import '../../models/notification_model.dart';
 import '../../models/respons_massage_code.dart';
 import '../../services/shared_preference_helper.dart';
 
@@ -95,7 +96,28 @@ class DioClient {
         ));
   }
 
-Future<void> StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
+
+  Future<List<NotificationModel>> getUserNotification() async {
+    Response response = await dio!.get(
+      ApiConstant.userNotification,
+      options: Options(
+        headers: {
+          "Accept-Language": shaedpref.getString("curruntLang"),
+          'Authorization':
+          'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+        },
+      ),
+    );
+    List<NotificationModel>  notificationModel= [];
+    notificationModel =
+        (response.data as List).map((e) => NotificationModel.fromJson(e)).toList();
+    print('listcat.length');
+    print(notificationModel.length);
+    return notificationModel;
+  }
+
+
+  Future<void> StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
     await dio!.post(ApiConstant.studentEvaluation,
         data: {
 

@@ -16,6 +16,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../data/api/exception_handling.dart';
 import '../main.dart';
+import '../models/notification_model.dart';
 import '../models/respons_massage_code.dart';
 import '../resources/color_manager.dart';
 import 'auth_provider.dart';
@@ -114,6 +115,25 @@ bool absence= false;
   }
 
   List<Map<String,int>> rats = [];
+
+  List<NotificationModel> notificationModel = [];
+  Future<ComplaintReplay?> getUserNotification() async {
+    try {
+      notificationModel = await DioClient.dioClient.getUserNotification();
+
+
+    } on DioError catch (e) {
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
 
 
   TextEditingController moreDetailsRate = TextEditingController();
