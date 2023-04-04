@@ -136,7 +136,7 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                                     Container(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.6,
+                                                0.59,
                                         child: CustomComplaints()),
                                     CustomButtonPrimary(
                                         text: "sendComplaint".tr,

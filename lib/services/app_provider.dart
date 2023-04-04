@@ -21,12 +21,14 @@ import '../resources/color_manager.dart';
 import 'auth_provider.dart';
 
 class AppProvider extends ChangeNotifier {
+
   AppProvider() {
     getProfileData();
     getComplaintReplay();
     getOrderReplay();
     getClassTime();
     getStandardRate();
+
   }
 
   int? _id;
@@ -37,6 +39,84 @@ class AppProvider extends ChangeNotifier {
     _id = id;
     notifyListeners();
   }
+
+  int? _studentID;
+
+  int get studentID => _studentID!;
+
+  void setStudentID(int studentID) {
+    _studentID = studentID;
+    notifyListeners();
+  }
+
+  bool? _presence;
+
+  bool get presenceValue => _presence!;
+
+  void setpresenceValue(bool presenceValue) {
+    _presence = presenceValue;
+    notifyListeners();
+  }
+  bool presence= false;
+
+  changePresence(){
+    presence=true;
+    absence=false;
+    notifyListeners();
+  }
+bool absence= false;
+
+  changeAbsence(){
+    presence=false;
+    absence=true;
+    notifyListeners();
+  }
+
+
+  int _currentIntValue1 = 3;
+  int _currentIntValue2 = 3;
+  int _currentIntValue3 = 3;
+  int _currentIntValue4 = 3;
+  int _currentIntValue5 = 3;
+
+  int get currentIntValue1 => _currentIntValue1!;
+
+  void setcurrentIntValue1(int currentIntValue1) {
+    _currentIntValue1 = currentIntValue1;
+    notifyListeners();
+  }
+
+
+
+  int get currentIntValue2 => _currentIntValue2!;
+
+  void setcurrentIntValue2(int currentIntValue2) {
+    _currentIntValue2 = currentIntValue2;
+    notifyListeners();
+  }
+  int get currentIntValue3 => _currentIntValue3!;
+
+  void setcurrentIntValue3(int currentIntValue3) {
+    _currentIntValue3 = currentIntValue3;
+    notifyListeners();
+  }
+  int get currentIntValue4 => _currentIntValue4!;
+
+  void setcurrentIntValue4(int currentIntValue4) {
+    _currentIntValue4 = currentIntValue4;
+    notifyListeners();
+  }
+  int get currentIntValue5 => _currentIntValue5!;
+
+  void setcurrentIntValue5(int currentIntValue5) {
+    _currentIntValue5 = currentIntValue5;
+    notifyListeners();
+  }
+
+  List<Map<String,int>> rats = [];
+
+
+  TextEditingController moreDetailsRate = TextEditingController();
 
   bool isLoading = false;
 
@@ -103,12 +183,14 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxWidth: 1800,
       maxHeight: 1800,
     );
+
 
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
@@ -149,6 +231,24 @@ class AppProvider extends ChangeNotifier {
   Future<String?> postComplaint(String title, String subject) async {
     try {
       await DioClient.dioClient.postComplaint(title, subject);
+      print("Done");
+      notifyListeners();
+    } on DioError catch (e) {
+      print(e.toString());
+      String massage = DioException.fromDioError(e).toString();
+      final snackBar = SnackBar(
+        content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
+        backgroundColor: ColorManager.red,
+        behavior: SnackBarBehavior.floating,
+        width: 300.w,
+        duration: const Duration(seconds: 1),
+      );
+    }
+    notifyListeners();
+  }
+  Future StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
+    try {
+      await DioClient.dioClient.StudentEvaluation( email,  isPresence,evalutions, note);
       print("Done");
       notifyListeners();
     } on DioError catch (e) {

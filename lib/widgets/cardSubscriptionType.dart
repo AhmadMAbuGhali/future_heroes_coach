@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class CardCustomers extends StatelessWidget {
   String name;
   String DOB;
-  String customerImage;
+  String customerImage= "3139c8bb-601a-44bd-8242-43d744ce0e76.jpg";
   Function()? ontap;
   CardCustomers(
       {super.key,
@@ -37,7 +37,7 @@ class CardCustomers extends StatelessWidget {
               CircleAvatar(
                 radius: 40,
                 backgroundImage:
-                    Image.network(ApiConstant.imageURL + customerImage).image,
+                 Image.network(ApiConstant.imageURL + customerImage).image,
               ),
             ],
           ),

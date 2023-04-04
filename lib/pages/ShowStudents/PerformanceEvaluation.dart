@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/resources/font_manager.dart';
@@ -69,13 +70,21 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Image.asset(
-                  ImageAssets.avatar,
-                  width: 100,
-                ),
-                Text('NameOfStudent'.tr),
-                Text('Yousef.n.aljazzar@gmail.com'),
-                Text('24-11-1999'),
+               CircleAvatar(
+                 radius: 50.r,
+                 backgroundImage:  Image.network(
+                   ApiConstant.imageURL+provider.studentModel[provider.studentID].imageString!,
+                   width: 100,
+                 ).image,
+                 foregroundImage:  Image.network(
+                   ApiConstant.imageURL+provider.studentModel[provider.studentID].imageString!,
+                   width: 100,
+                 ).image,
+               ),
+                Text(provider.studentModel[provider.studentID].fullName!),
+                Text(provider.studentModel[provider.studentID].email!),
+                Text(provider.studentModel[provider.studentID].membershipNo!),
+
                 Container(
                   padding: EdgeInsets.all(5.0),
                   margin: const EdgeInsets.all(10.0),
@@ -99,12 +108,10 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                         children: [
                           InkWell(
                             onTap: (() {
-                              setState(() {
-                                Presence = true;
-                                absence = false;
-                              });
+                              provider.changeAbsence();
+                              provider.setpresenceValue(true);
                             }),
-                            child: !Presence
+                            child: provider.presence
                                 ? CircleAvatar(
                                     radius: 16.0,
                                     backgroundColor: ColorManager.gray,
@@ -125,12 +132,11 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                           ),
                           InkWell(
                             onTap: (() {
-                              setState(() {
-                                Presence = false;
-                                absence = true;
-                              });
+                             provider.changePresence();
+                             provider.setpresenceValue(false);
+
                             }),
-                            child: absence
+                            child: !provider.absence
                                 ? CircleAvatar(
                                     radius: 16.0,
                                     backgroundColor: ColorManager.red,
@@ -152,14 +158,201 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                   ),
                 ),
                 SizedBox(
-                  height: 300.h,
-                  child: ListView.builder(
-                      itemCount: provider.standardRate.length,
-                      itemBuilder: (context, index) {
-                        return PlusWidget(
-                          title: provider.standardRate[index].name ?? 'd',
-                        );
-                      }),
+
+                  child: Column(
+                    children: [
+                  Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        provider.standardRate[0].name!,
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.remove),
+                            onPressed: () {
+                              final newValue = provider.currentIntValue1 - 1;
+                              provider.setcurrentIntValue1(newValue.clamp(0, 5));
+
+                            },
+                          ),
+                          Text('${provider.currentIntValue1}'),
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+
+                              final newValue = provider.currentIntValue1 + 1;
+                              provider.setcurrentIntValue1(newValue.clamp(0, 5));
+
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                  Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        provider.standardRate[1].name!,
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: ColorManager.primary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.remove),
+                            onPressed: () {
+                              final newValue = provider.currentIntValue2 - 1;
+                              provider.setcurrentIntValue2(newValue.clamp(0, 5));
+
+                            },
+                          ),
+                          Text('${provider.currentIntValue2}'),
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+
+                              final newValue = provider.currentIntValue2 + 1;
+                              provider.setcurrentIntValue2(newValue.clamp(0, 5));
+
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.standardRate[2].name!,
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: ColorManager.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.remove),
+                                  onPressed: () {
+                                    final newValue = provider.currentIntValue3 - 1;
+                                    provider.setcurrentIntValue3(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                                Text('${provider.currentIntValue3}'),
+                                IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: () {
+
+                                    final newValue = provider.currentIntValue3 + 1;
+                                    provider.setcurrentIntValue3(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.standardRate[3].name!,
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: ColorManager.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.remove),
+                                  onPressed: () {
+                                    final newValue = provider.currentIntValue4 - 1;
+                                    provider.setcurrentIntValue4(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                                Text('${provider.currentIntValue4}'),
+                                IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: () {
+
+                                    final newValue = provider.currentIntValue4 + 1;
+                                    provider.setcurrentIntValue4(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              provider.standardRate[4].name!,
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: ColorManager.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.remove),
+                                  onPressed: () {
+                                    final newValue = provider.currentIntValue5 - 1;
+                                    provider.setcurrentIntValue5(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                                Text('${provider.currentIntValue5}'),
+                                IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: () {
+
+                                    final newValue = provider.currentIntValue5 + 1;
+                                    provider.setcurrentIntValue5(newValue.clamp(0, 5));
+
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
                 ),
                 SizedBox(
                   height: 10.h,
@@ -183,9 +376,11 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                     TextField(
                       keyboardType: TextInputType.multiline,
                       maxLines: 8,
+                      controller: provider.moreDetailsRate,
                       decoration: InputDecoration(
                         fillColor: ColorManager.white,
                         filled: true,
+
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 16.w, vertical: 14.h),
                         hintText: 'otherDetails'.tr,
@@ -218,7 +413,39 @@ class _PerformanceEvaluationState extends State<PerformanceEvaluation> {
                     ),
                     CustomButtonPrimary(
                         text: 'Submitevaluation'.tr,
-                        onpressed: () {
+                        onpressed: () async{
+
+
+                          provider.rats=[];
+                          Map<String,int> rate1 = {provider.standardRate[0].id!.toString():provider.currentIntValue1} ;
+                          Map<String,int> rate2 = {provider.standardRate[1].id!.toString():provider.currentIntValue2} ;
+                          Map<String,int> rate3 = {provider.standardRate[2].id!.toString():provider.currentIntValue3} ;
+                          Map<String,int> rate4 = {provider.standardRate[3].id!.toString():provider.currentIntValue4} ;
+                          Map<String,int> rate5 = {provider.standardRate[4].id!.toString():provider.currentIntValue5} ;
+                          provider.rats.add(rate1);
+                          provider.rats.add(rate2);
+                          provider.rats.add(rate3);
+                          provider.rats.add(rate4);
+                          provider.rats.add(rate5);
+
+try{
+  print(provider.studentModel[provider.studentID].email!);
+  print(provider.presence);
+  print(provider.rats);
+  print(provider.moreDetailsRate.text);
+
+
+
+  await provider.StudentEvaluation(provider.studentModel[provider.studentID].email!, provider.presenceValue,provider.rats, provider.moreDetailsRate.text);
+
+
+  print("Done");
+}catch(e){
+
+  print("Error");
+  print(e.toString());
+
+}
                           // snakbarWidget(context,
                           //     Titel: 'تم الارسال بنجاح',
                           //     Description: 'شكرا لك ايها المعلم');

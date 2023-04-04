@@ -95,6 +95,25 @@ class DioClient {
         ));
   }
 
+Future<void> StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
+    await dio!.post(ApiConstant.studentEvaluation,
+        data: {
+
+      "email": email,
+      "isPresence": isPresence,
+      "evalutions": evalutions,
+      "note": note,
+
+        },
+        options: Options(
+          headers: {
+            "Accept-Language": shaedpref.getString("curruntLang"),
+            'Authorization':
+                'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+          },
+        ));
+  }
+
   //profileData
 
   Future<profile_model> getProfileData() async {

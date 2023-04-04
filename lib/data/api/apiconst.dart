@@ -11,6 +11,7 @@ class ApiConstant {
       'Authentication/GetAllRespationUsers';
   static const String CoachSchedule = 'Class/CoachSchedule';
   static const String disease = 'Disease';
+  static const String studentEvaluation = 'StudentEvaluation';
   static const String termsAndConditions = 'TermsAndConditions';
   static const String trainClass = 'Class';
   static const String offer = 'Offer';

@@ -58,6 +58,7 @@ class _PersonalDataState extends State<PersonalData> {
                             IconButton(
                                 onPressed: () {
                                   Get.back();
+                                  provider.getProfileData();
                                 },
                                 icon: Icon(
                                   Icons.arrow_back,

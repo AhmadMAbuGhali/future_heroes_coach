@@ -52,14 +52,13 @@ class _MainNavBarState extends State<MainNavBar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = PersistentTabController(initialIndex: 4);
+    _controller = PersistentTabController(initialIndex: 3);
   }
 
   List<Widget> _buildScreens() {
     return [
       ProfilePage(),
       NotificationPage(),
-      QRCode(),
       RequestsAndComplaints(),
       HomeScreen()
     ];
@@ -80,12 +79,7 @@ class _MainNavBarState extends State<MainNavBar> {
         activeColorPrimary: ColorManager.primary,
         inactiveColorPrimary: Colors.grey,
       ),
-      PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(IconAssets.qr_code),
-        title: ("qrCode".tr),
-        activeColorPrimary: ColorManager.primary,
-        inactiveColorPrimary: Colors.grey,
-      ),
+
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(IconAssets.paper),
         title: ("requests".tr),
@@ -134,7 +128,7 @@ class _MainNavBarState extends State<MainNavBar> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style15, // Choose the nav bar style with this property.
+          NavBarStyle.style3, // Choose the nav bar style with this property.
     );
   }
 }

@@ -200,9 +200,10 @@ class ShowStudents extends StatelessWidget {
                         name: provider.studentModel[index].fullName!,
                         DOB: provider.studentModel[index].membershipNo ?? '',
                         customerImage:
-                            provider.studentModel[index].imageString ?? '',
+                            provider.studentModel[index].imageString?? '3139c8bb-601a-44bd-8242-43d744ce0e76.jpg',
                         ontap: () {
                           provider.getStandardRate();
+                          provider.setStudentID(index);
                           Get.toNamed(RouteHelper.performanceEvaluation);
                         },
                       );

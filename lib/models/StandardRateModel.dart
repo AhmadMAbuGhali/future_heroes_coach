@@ -11,12 +11,7 @@ class StandardRateModel {
   });
 
   StandardRateModel.fromJson(Map<String, dynamic> json) {
-    if (shaedpref.getString("curruntLang") == AppStrings.ar)
-      name = json['name'];
-    else
-      name = json['nameEn'];
-    //Multi Excerption ar/en
-
+    name = json['name'];
     id = json['id'];
   }
 
