@@ -135,7 +135,6 @@ class Login extends StatelessWidget {
                         loginFormKey.currentState!.save();
                         await provider.login(provider.emailLoginPage.text,
                             provider.passwordLoginPage.text, context);
-                        print(getIt<SharedPreferenceHelper>().getUserToken());
                         if (loginFormKey.currentState!.validate()) {
                           String? statusString =
                               getIt<SharedPreferenceHelper>().getStatus();
@@ -145,7 +144,7 @@ class Login extends StatelessWidget {
                             snakbarWidget(
                               context,
                               Titel: 'dataErorr'.tr,
-                              Description: 'dataErorrDetails'.tr,
+                              Description: 'Make sure that Data is Good'.tr,
                             ).error();
                           }
                         } else {
@@ -159,7 +158,7 @@ class Login extends StatelessWidget {
                         CircularProgressIndicator();
                       }
                     },
-                  ),
+                  )
                 ],
               )),
         ),

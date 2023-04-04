@@ -10,6 +10,9 @@ import 'package:future_heroes_coach/models/class_time_model.dart';
 import 'package:future_heroes_coach/models/complaint_replay.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
 import 'package:future_heroes_coach/models/profile_data.dart';
+import 'package:future_heroes_coach/pages/auth/login.dart';
+import 'package:future_heroes_coach/pages/home/home_screen.dart';
+import 'package:future_heroes_coach/routes/route_helper.dart';
 import 'package:future_heroes_coach/services/shared_preference_helper.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -22,14 +25,12 @@ import '../resources/color_manager.dart';
 import 'auth_provider.dart';
 
 class AppProvider extends ChangeNotifier {
-
   AppProvider() {
     getProfileData();
     getComplaintReplay();
     getOrderReplay();
     getClassTime();
     getStandardRate();
-
   }
 
   int? _id;
@@ -58,21 +59,22 @@ class AppProvider extends ChangeNotifier {
     _presence = presenceValue;
     notifyListeners();
   }
-  bool presence= false;
 
-  changePresence(){
-    presence=true;
-    absence=false;
-    notifyListeners();
-  }
-bool absence= false;
+  bool presence = false;
 
-  changeAbsence(){
-    presence=false;
-    absence=true;
+  changePresence() {
+    presence = true;
+    absence = false;
     notifyListeners();
   }
 
+  bool absence = false;
+
+  changeAbsence() {
+    presence = false;
+    absence = true;
+    notifyListeners();
+  }
 
   int _currentIntValue1 = 3;
   int _currentIntValue2 = 3;
@@ -87,26 +89,27 @@ bool absence= false;
     notifyListeners();
   }
 
-
-
   int get currentIntValue2 => _currentIntValue2!;
 
   void setcurrentIntValue2(int currentIntValue2) {
     _currentIntValue2 = currentIntValue2;
     notifyListeners();
   }
+
   int get currentIntValue3 => _currentIntValue3!;
 
   void setcurrentIntValue3(int currentIntValue3) {
     _currentIntValue3 = currentIntValue3;
     notifyListeners();
   }
+
   int get currentIntValue4 => _currentIntValue4!;
 
   void setcurrentIntValue4(int currentIntValue4) {
     _currentIntValue4 = currentIntValue4;
     notifyListeners();
   }
+
   int get currentIntValue5 => _currentIntValue5!;
 
   void setcurrentIntValue5(int currentIntValue5) {
@@ -114,14 +117,12 @@ bool absence= false;
     notifyListeners();
   }
 
-  List<Map<String,int>> rats = [];
+  List<Map<String, int>> rats = [];
 
   List<NotificationModel> notificationModel = [];
   Future<ComplaintReplay?> getUserNotification() async {
     try {
       notificationModel = await DioClient.dioClient.getUserNotification();
-
-
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
@@ -134,7 +135,6 @@ bool absence= false;
     }
     notifyListeners();
   }
-
 
   TextEditingController moreDetailsRate = TextEditingController();
 
@@ -170,6 +170,8 @@ bool absence= false;
 
   logOut() {
     getIt<SharedPreferenceHelper>().setIsLogin(isLogint: false);
+    getIt<SharedPreferenceHelper>().setRememberMe(rememberMe: false);
+
     getIt<SharedPreferenceHelper>().setUserToken(userToken: '');
     clearAllData();
   }
@@ -179,6 +181,7 @@ bool absence= false;
     notifyListeners();
   }
 
+  List<profile_model?> ProfileData = [];
   Future<profile_model?> getProfileData() async {
     try {
       profileData = await DioClient.dioClient.getProfileData();
@@ -203,14 +206,12 @@ bool absence= false;
     notifyListeners();
   }
 
-
   Future _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.camera,
       maxWidth: 1800,
       maxHeight: 1800,
     );
-
 
     if (pickedFile != null) {
       // File imageFile = File(pickedFile.path);
@@ -251,10 +252,9 @@ bool absence= false;
   Future<String?> postComplaint(String title, String subject) async {
     try {
       await DioClient.dioClient.postComplaint(title, subject);
-      print("Done");
+
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -266,13 +266,15 @@ bool absence= false;
     }
     notifyListeners();
   }
-  Future StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
+
+  Future StudentEvaluation(String email, bool isPresence,
+      List<Map<String, int>> evalutions, String note) async {
     try {
-      await DioClient.dioClient.StudentEvaluation( email,  isPresence,evalutions, note);
-      print("Done");
+      await DioClient.dioClient
+          .StudentEvaluation(email, isPresence, evalutions, note);
+
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -288,10 +290,9 @@ bool absence= false;
   Future<String?> postOrder(String title, String subject) async {
     try {
       await DioClient.dioClient.postOrder(title, subject);
-      print("Done");
+
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -310,10 +311,9 @@ bool absence= false;
       int id, String reason, String details) async {
     try {
       await DioClient.dioClient.postUserPostponement(id, reason, details);
-      print("Done");
+
       notifyListeners();
     } on DioError catch (e) {
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -338,7 +338,7 @@ bool absence= false;
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.toString());
+
       return e.response?.data['message'].toString();
     }
     return null;
@@ -419,10 +419,7 @@ bool absence= false;
   Future<StandardRateModel?> getStandardRate() async {
     try {
       standardRate = await DioClient.dioClient.getStandardRate();
-      print(standardRate.length);
-      print(standardRate[1].name);
     } on DioError catch (e) {
-      print('object');
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -438,7 +435,7 @@ bool absence= false;
   Future<String?> updateImage(File image) async {
     try {
       await DioClient.dioClient.updateImage(image);
-      print("Done");
+
       notifyListeners();
     } on DioError catch (e) {
       String massage = DioException.fromDioError(e).toString();

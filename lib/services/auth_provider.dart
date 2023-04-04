@@ -64,6 +64,7 @@ class AuthProvider extends ChangeNotifier {
             .setStatus(statusString: response.status!);
         getIt<SharedPreferenceHelper>()
             .setActiveStat(activeStat: response.isActive!);
+        getIt<SharedPreferenceHelper>().setRememberMe(rememberMe: rememberMe);
         _loading = false;
         notifyListeners();
       }
@@ -220,10 +221,8 @@ class AuthProvider extends ChangeNotifier {
       timeListMap[subCatId] = listTime;
       timeListMain.add(listTime);
 
-      print("timeListMain");
-      print(timeListMain.toString());
       timeListString = [];
-      print(listTime.length);
+
       for (TimeList value in listTime) {
         String days = '';
         for (ClassDateTimes listvalue in value.classDateTimes ?? []) {
@@ -235,11 +234,9 @@ class AuthProvider extends ChangeNotifier {
         maptimeListString[value.id ?? 0] = days;
         timeListString.add(days);
       }
-      print(timeListString.toString());
+
       notifyListeners();
     } on DioError catch (e) {
-      print('e.toString()');
-      print(e.toString());
       String massage = DioException.fromDioError(e).toString();
       final snackBar = SnackBar(
         content: SizedBox(height: 32.h, child: Center(child: Text(massage))),
@@ -316,7 +313,7 @@ class AuthProvider extends ChangeNotifier {
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.response?.data['message'].toString());
+
       return e.response?.data['message'].toString();
     }
   }
@@ -339,7 +336,6 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String?> resetPassword(String pass, String conPass) async {
     try {
-      print(emailSendCodeController.text.trim());
       ResponsMassageCode? success = await DioClient.dioClient
           .resetPassword(emailSendCodeController.text.trim(), pass, conPass);
 
@@ -349,7 +345,7 @@ class AuthProvider extends ChangeNotifier {
       }
     } on DioError catch (e) {
       notifyListeners();
-      print(e.toString());
+
       return e.response?.data['message'].toString();
     }
     return null;

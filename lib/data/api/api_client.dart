@@ -11,6 +11,11 @@ import 'package:future_heroes_coach/models/login_model.dart';
 import 'package:future_heroes_coach/models/order_replay.dart';
 import 'package:future_heroes_coach/models/profile_data.dart';
 import 'package:future_heroes_coach/models/time_list.dart';
+import 'package:future_heroes_coach/pages/auth/login.dart';
+import 'package:future_heroes_coach/pages/home/home_screen.dart';
+import 'package:future_heroes_coach/pages/navbar/main_navbar.dart';
+import 'package:future_heroes_coach/routes/route_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/class_time_model.dart';
 import '../../models/notification_model.dart';
@@ -47,6 +52,11 @@ class DioClient {
     }
   }
 
+  signout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
   Future<List<TimeList>> getTimeList(String emailUser) async {
     Response response = await dio!.get(ApiConstant.timeList,
         options: Options(
@@ -55,8 +65,7 @@ class DioClient {
         queryParameters: {"userEmail": emailUser});
     List<TimeList> listcat = [];
     listcat = (response.data as List).map((e) => TimeList.fromJson(e)).toList();
-    print('listcat.length');
-    print(listcat.length);
+
     return listcat;
   }
 
@@ -96,7 +105,6 @@ class DioClient {
         ));
   }
 
-
   Future<List<NotificationModel>> getUserNotification() async {
     Response response = await dio!.get(
       ApiConstant.userNotification,
@@ -104,28 +112,26 @@ class DioClient {
         headers: {
           "Accept-Language": shaedpref.getString("curruntLang"),
           'Authorization':
-          'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
+              'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
         },
       ),
     );
-    List<NotificationModel>  notificationModel= [];
-    notificationModel =
-        (response.data as List).map((e) => NotificationModel.fromJson(e)).toList();
-    print('listcat.length');
-    print(notificationModel.length);
+    List<NotificationModel> notificationModel = [];
+    notificationModel = (response.data as List)
+        .map((e) => NotificationModel.fromJson(e))
+        .toList();
+
     return notificationModel;
   }
 
-
-  Future<void> StudentEvaluation(String email, bool isPresence,List<Map<String,int>> evalutions,String note) async {
+  Future<void> StudentEvaluation(String email, bool isPresence,
+      List<Map<String, int>> evalutions, String note) async {
     await dio!.post(ApiConstant.studentEvaluation,
         data: {
-
-      "email": email,
-      "isPresence": isPresence,
-      "evalutions": evalutions,
-      "note": note,
-
+          "email": email,
+          "isPresence": isPresence,
+          "evalutions": evalutions,
+          "note": note,
         },
         options: Options(
           headers: {
@@ -165,12 +171,8 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post complaint success");
     } on DioError catch (e) {
-      if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
-      }
-      print(e.toString());
+      if (e.response?.statusCode == 500) {}
     }
   }
 
@@ -183,12 +185,8 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post Order success");
     } on DioError catch (e) {
-      if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
-      }
-      print(e.toString());
+      if (e.response?.statusCode == 500) {}
     }
   }
 
@@ -202,12 +200,8 @@ class DioClient {
             'Authorization':
                 'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
           }));
-      print("Post Order success");
     } on DioError catch (e) {
-      if (e.response?.statusCode == 500) {
-        print("Server error occurred: ${e.message}");
-      }
-      print(e.toString());
+      if (e.response?.statusCode == 500) {}
     }
   }
 
@@ -226,8 +220,7 @@ class DioClient {
     complaintReplay = (response.data as List)
         .map((e) => ComplaintReplay.fromJson(e))
         .toList();
-    print('listcat.length');
-    print(complaintReplay.length);
+
     return complaintReplay;
   }
 
@@ -245,8 +238,7 @@ class DioClient {
     List<OrderReplay> orderReplay = [];
     orderReplay =
         (response.data as List).map((e) => OrderReplay.fromJson(e)).toList();
-    print('listcat.length');
-    print(orderReplay.length);
+
     return orderReplay;
   }
 
@@ -278,7 +270,6 @@ class DioClient {
     classTime =
         (response.data as List).map((e) => ClassTime.fromJson(e)).toList();
 
-    print(classTime.length);
     return classTime;
   }
 
@@ -350,9 +341,7 @@ class DioClient {
                   'Bearer ${getIt<SharedPreferenceHelper>().getUserToken()}'
             },
           ));
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 
   Future<ResponsMassageCode?> resetPassword(
@@ -370,7 +359,6 @@ class DioClient {
   Future<ResponsMassageCode?> resetPasswordAuthorize(
       String oldPass, String password, String confirmPassword) async {
     try {
-      print("1");
       Response response = await dio!.put(
         ApiConstant.resetPasswordAuthorize,
         data: {
@@ -384,12 +372,9 @@ class DioClient {
         }),
       );
 
-      print("2");
       ResponsMassageCode responseMassage =
           ResponsMassageCode.fromJson(response.data);
       return responseMassage;
-    } catch (e) {
-      print("3");
-    }
+    } catch (e) {}
   }
 }

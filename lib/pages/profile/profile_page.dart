@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:future_heroes_coach/data/api/api_client.dart';
+import 'package:future_heroes_coach/data/api/api_client.dart';
+import 'package:future_heroes_coach/pages/auth/login.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/routes/route_helper.dart';
 import 'package:future_heroes_coach/services/app_provider.dart';
@@ -72,8 +75,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () async {
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.clear();
+                        DioClient.dioClient.signout();
                         provider.logOut();
-                        Get.toNamed(RouteHelper.login);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Login()),
+                            (Route<dynamic> route) => false);
+                        //   RouteHelper.NavigateWithReplacemtnToWidget();
+                        //  Get.offAndToNamed(RouteHelper.login);
                       },
                       child: Container(
                         width: 100.w,

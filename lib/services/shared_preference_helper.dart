@@ -9,6 +9,9 @@ class SharedPreferenceHelper {
   static const String userEmail = 'userEmail';
   static const String userDOB = 'userDOB';
   static const String userPhoneNumber = 'userPhoneNumber';
+  static const String isRememberMe = "isRememberMe";
+  static const String isFirstTime = "isFirstTime";
+
   final SharedPreferences prefs;
 
   SharedPreferenceHelper({required this.prefs});
@@ -17,12 +20,26 @@ class SharedPreferenceHelper {
     await prefs.setString(token, userToken);
   }
 
+  bool? getFirstTime() {
+    final firstTime = prefs.getBool(isFirstTime);
+    return firstTime;
+  }
+
   Future<void> setStatus({required String statusString}) async {
     await prefs.setString(status, statusString);
   }
 
+  Future<void> setRememberMe({required bool rememberMe}) async {
+    await prefs.setBool(isRememberMe, rememberMe);
+  }
+
   Future<void> setEmail({required String email}) async {
     await prefs.setString(userEmail, email);
+  }
+
+  bool? getRememberMe() {
+    final rememberMe = prefs.getBool(isRememberMe);
+    return rememberMe;
   }
 
   Future<void> setPhone({required String phone}) async {

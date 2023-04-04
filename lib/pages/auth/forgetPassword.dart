@@ -55,7 +55,7 @@ class ForgetPassword extends StatelessWidget {
                 CustomTextFormAuth(
                   hidepassword: false,
                   textInputType: TextInputType.emailAddress,
-                  myController: provider.emailSendCodeController,
+                  myController: provider.emailLoginPage,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'emailEmpty'.tr;
