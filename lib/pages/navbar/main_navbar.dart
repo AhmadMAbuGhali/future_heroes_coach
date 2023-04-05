@@ -4,7 +4,6 @@ import 'package:future_heroes_coach/pages/home/home_screen.dart';
 
 import 'package:future_heroes_coach/pages/profile/profile_page.dart';
 import 'package:future_heroes_coach/pages/profile/requests%D9%80and%D9%80complaints.dart';
-import 'package:future_heroes_coach/pages/qr_code/qr_code.dart';
 import 'package:future_heroes_coach/resources/assets_manager.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/utils/colors.dart';

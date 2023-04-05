@@ -15,7 +15,6 @@ import 'package:future_heroes_coach/pages/onBoarding/onBoarding.dart';
 import 'package:future_heroes_coach/pages/profile/change_password.dart';
 import 'package:future_heroes_coach/pages/profile/class_time.dart';
 import 'package:future_heroes_coach/pages/profile/personal_data.dart';
-import 'package:future_heroes_coach/pages/profile/postpone%D9%80an%D9%80appointment.dart';
 import 'package:future_heroes_coach/pages/profile/profile_page.dart';
 import 'package:future_heroes_coach/pages/profile/requests%D9%80and%D9%80complaints.dart';
 import 'package:future_heroes_coach/pages/profile/send_complaints.dart';
@@ -138,12 +137,7 @@ class RouteHelper {
         return NoConnectionScreen();
       },
     ),
-    GetPage(
-      name: postponeAnAppointment,
-      page: () {
-        return PostponeAnAppointment();
-      },
-    ),
+
     GetPage(
       name: sendComplaints,
       page: () {

@@ -40,12 +40,7 @@ class NoConnectionScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(color: ColorManager.gray),
             ),
-            CustomButtonPrimary(
-              text: 'tryAgain'.tr,
-              onpressed: () {
-                Get.offNamed(RouteHelper.initial);
-              },
-            )
+
           ],
         ),
       ),

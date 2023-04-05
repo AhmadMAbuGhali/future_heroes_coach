@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_coach/services/auth_provider.dart';
 import 'package:future_heroes_coach/widgets/snakbar.dart';
@@ -13,42 +14,41 @@ import '../../services/app_provider.dart';
 import '../../services/shared_preference_helper.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/CustomTextFormAuth.dart';
+import '../auth/NoConnection.dart';
 
 class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
       return Scaffold(
-        body: SingleChildScrollView(
+        body: OfflineBuilder(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Padding(
-              padding: const EdgeInsets.only(top: 40),
+              padding:  EdgeInsets.only(top: 40.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  color: ColorManager.primary,
-                                )),
-                            Text(
-                              'personalDetails'.tr,
-                              style: getBoldStyle(color: ColorManager.primary),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: ColorManager.primary,
+                              )),
+                          Text(
+                            'personalDetails'.tr,
+                            style: getBoldStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: 40.h,
@@ -56,6 +56,9 @@ class ChangePassword extends StatelessWidget {
                   Text(
                     'lastPassword'.tr,
                     style: TextStyle(fontSize: 12.sp),
+                  ),
+                  SizedBox(
+                    height: 10.h,
                   ),
                   CustomTextFormAuth(
                     textInputType: TextInputType.visiblePassword,
@@ -65,16 +68,6 @@ class ChangePassword extends StatelessWidget {
                     },
                     hintText: '*********',
                     myController: provider.oldPass,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'passwordEmpty'.tr;
-                      } else if (value.isValidPassword() == false) {
-                        return 'invalidPassword'.tr;
-                      } else if (value.isValidPassword() == true) {
-                        return null;
-                      }
-                      return null;
-                    },
                     // labelText: 'كلمة المرور',
                     iconData: provider.showOldPasswordAuth
                         ? Icons.visibility
@@ -87,6 +80,9 @@ class ChangePassword extends StatelessWidget {
                     'typeNewPassword'.tr,
                     style: TextStyle(fontSize: 12.sp),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   CustomTextFormAuth(
                     textInputType: TextInputType.visiblePassword,
                     hidepassword: provider.showNewPasswordAuth,
@@ -95,16 +91,6 @@ class ChangePassword extends StatelessWidget {
                     },
                     hintText: '*********',
                     myController: provider.newPass,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'passwordEmpty'.tr;
-                      } else if (value.isValidPassword() == false) {
-                        return 'invalidPassword'.tr;
-                      } else if (value.isValidPassword() == true) {
-                        return null;
-                      }
-                      return null;
-                    },
                     // labelText: 'كلمة المرور',
                     iconData: provider.showNewPasswordAuth
                         ? Icons.visibility
@@ -117,6 +103,9 @@ class ChangePassword extends StatelessWidget {
                     'retypePassword'.tr,
                     style: TextStyle(fontSize: 12.sp),
                   ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   CustomTextFormAuth(
                     textInputType: TextInputType.visiblePassword,
                     hidepassword: provider.showConfPasswordAuth,
@@ -125,16 +114,6 @@ class ChangePassword extends StatelessWidget {
                     },
                     hintText: '*********',
                     myController: provider.confPass,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'passwordEmpty'.tr;
-                      } else if (value.isValidPassword() == false) {
-                        return 'invalidPassword'.tr;
-                      } else if (value.isValidPassword() == true) {
-                        return null;
-                      }
-                      return null;
-                    },
                     // labelText: 'كلمة المرور',
                     iconData: provider.showConfPasswordAuth
                         ? Icons.visibility
@@ -147,26 +126,33 @@ class ChangePassword extends StatelessWidget {
                       text: "save".tr,
                       onpressed: () {
                         if (provider.newPass.text == provider.confPass.text) {
-                          print(
-                              {getIt<SharedPreferenceHelper>().getUserToken()});
                           provider.resetPasswordAuthorize(
                               provider.oldPass.text.trim(),
                               provider.newPass.text.trim(),
                               provider.confPass.text.trim());
-                          Get.offAllNamed(RouteHelper.initial);
+                          // Get.toNamed(RouteHelper.initial);
                         } else {
-                          snakbarWidget(
-                              Titel: 'الباسوورد غير متطابق',
-                              Description: 'fdfdf',
-                              context);
+                          snakbarWidget(context,
+                              Titel: 'PassNotSame'.tr,
+                              Description: 'EnterMatchingPassword'.tr)
+                              .error();
                         }
                       }),
                 ],
               ),
             ),
           ),
+          connectivityBuilder:
+              (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+            final bool connected = connectivity != ConnectivityResult.none;
+            return connected?child:NoConnectionScreen();
+
+
+          },
         ),
       );
     });
   }
 }
+

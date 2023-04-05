@@ -10,58 +10,76 @@ import 'package:get/get.dart';
 
 class CardCustomers extends StatelessWidget {
   String name;
-  String DOB;
+  String memberLabel;
+  String memberNumber;
   String customerImage= "3139c8bb-601a-44bd-8242-43d744ce0e76.jpg";
   Function()? ontap;
   CardCustomers(
       {super.key,
       required this.name,
-      required this.DOB,
+      required this.memberLabel,
+        required this.memberNumber,
       required this.customerImage,
       required this.ontap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
-      margin: EdgeInsets.symmetric(vertical: 5.h),
-      decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.gray, width: 2),
-          borderRadius: BorderRadius.circular(15)),
-      child: Row(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage:
-                 Image.network(ApiConstant.imageURL + customerImage).image,
-              ),
-            ],
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
-          InkWell(
-              child: Column(
-                children: [
-                  Text(name),
-                  Text(DOB,
-                      style: TextStyle(
-                          color: ColorManager.primary,
-                          fontWeight: FontWeight.normal)),
-                ],
-              ),
-              onTap: ontap),
-          Spacer(),
-          Column(
-            children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
-            ],
-          )
-        ],
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
+        margin: EdgeInsets.symmetric(vertical: 5.h),
+        decoration: BoxDecoration(
+            border: Border.all(color: ColorManager.gray, width: 2),
+            borderRadius: BorderRadius.circular(15)),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage:
+                   Image.network(ApiConstant.imageURL + customerImage).image,
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(name),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(memberLabel,
+                        ),
+
+                   SizedBox(width: 5.w,),
+                    Container(
+                      margin: EdgeInsets.only(top: 5),
+                      child: Text(memberNumber,
+                          style:  TextStyle(
+                              color: ColorManager.primary,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              children: [
+                IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_forward))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

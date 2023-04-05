@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:future_heroes_coach/data/api/apiconst.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
@@ -19,6 +20,7 @@ import '../../services/app_provider.dart';
 import '../../services/shared_preference_helper.dart';
 import '../../widgets/CustomButtonPrimary.dart';
 import '../../widgets/CustomTextFormAuth.dart';
+import '../auth/NoConnection.dart';
 
 class PersonalData extends StatefulWidget {
   PersonalData({Key? key}) : super(key: key);
@@ -36,101 +38,108 @@ class _PersonalDataState extends State<PersonalData> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
-      return SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () async {
-            await provider.getProfileData();
-          },
-          child: Scaffold(
-            backgroundColor: ColorManager.backGround,
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
+      return Scaffold(
+        backgroundColor: ColorManager.backGround,
+        body: OfflineBuilder(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Padding(
+              padding: EdgeInsets.only(top: 40.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                  provider.getProfileData();
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  color: ColorManager.primary,
-                                )),
-                            Text(
-                              "user".tr,
-                              style: getBoldStyle(color: ColorManager.primary),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () async {
+                                Get.back();
+                                await provider.getComplaintReplay();
+                                await provider.getProfileData();
+                                await provider.getUserNotification();
+                                await provider.getClassTime();
+                                await provider.getOrderReplay();
 
-                  Center(
-                      child: CustomTextTitle(
-                    text: 'personalDetails'.tr,
-                  )),
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: ColorManager.primary,
+                              )),
+                          Text(
+                            "user".tr,
+                            style: getBoldStyle(color: ColorManager.primary),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                   SizedBox(
-                    height: 10.h,
+                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        'personalDetails'.tr,
+                        style: getBoldStyle(color: ColorManager.black),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 10.h,
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       SizedBox(
-                        height: 80.h,
-                        width: 80.w,
+                        height: 90.h,
+                        width: 90.w,
                         child: Stack(
                           clipBehavior: Clip.none,
                           fit: StackFit.expand,
                           children: [
                             CircleAvatar(
                               foregroundImage:
-                                  provider.profileData!.imageString == null
-                                      ? Image.asset(
-                                          ImageAssets.avatar,
-                                        ).image
-                                      : provider.imageFile == null
-                                          ? Image.network(
-                                              ApiConstant.imageURL +
-                                                  provider.profileData!
-                                                      .imageString!,
-                                              fit: BoxFit.cover,
-                                            ).image
-                                          : Image.file(
-                                              provider.imageFile!,
-                                              fit: BoxFit.cover,
-                                            ).image,
+                              provider.profileData!.imageString == null
+                                  ? Image.asset(
+                                ImageAssets.avatar,
+                              ).image
+                                  : provider.imageFile == null
+                                  ? Image.network(
+                                ApiConstant.imageURL +
+                                    provider
+                                        .profileData!.imageString!,
+                                fit: BoxFit.cover,
+                              ).image
+                                  : Image.file(
+                                provider.imageFile!,
+                                fit: BoxFit.cover,
+                              ).image,
                               backgroundImage:
-                                  provider.profileData!.imageString == null
-                                      ? Image.asset(
-                                          ImageAssets.avatar,
-                                        ).image
-                                      : provider.imageFile == null
-                                          ? Image.network(
-                                              ApiConstant.imageURL +
-                                                  provider.profileData!
-                                                      .imageString!,
-                                              fit: BoxFit.cover,
-                                            ).image
-                                          : Image.file(
-                                              provider.imageFile!,
-                                              fit: BoxFit.cover,
-                                            ).image,
+                              provider.profileData!.imageString == null
+                                  ? Image.asset(
+                                ImageAssets.avatar,
+                              ).image
+                                  : provider.imageFile == null
+                                  ? Image.network(
+                                ApiConstant.imageURL +
+                                    provider
+                                        .profileData!.imageString!,
+                                fit: BoxFit.cover,
+                              ).image
+                                  : Image.file(
+                                provider.imageFile!,
+                                fit: BoxFit.cover,
+                              ).image,
                             ),
                             Positioned(
-                                bottom: -10.h,
-                                right: -35.w,
+                                bottom: -5.h,
+                                right: -30.w,
                                 child: RawMaterialButton(
                                   onPressed: () {
                                     showModalBottomSheet(
@@ -139,13 +148,13 @@ class _PersonalDataState extends State<PersonalData> {
                                     );
                                   },
                                   elevation: 2.0,
-                                  fillColor: Color(0xFFF5F6F9),
-                                  child: Icon(
+                                  fillColor: const Color(0xFFF5F6F9),
+                                  padding: const EdgeInsets.all(5.0),
+                                  shape: const CircleBorder(),
+                                  child: const Icon(
                                     Icons.camera_alt_outlined,
                                     color: Colors.blue,
                                   ),
-                                  padding: EdgeInsets.all(5.0),
-                                  shape: CircleBorder(),
                                 )),
                           ],
                         ),
@@ -154,7 +163,7 @@ class _PersonalDataState extends State<PersonalData> {
                   ),
 
                   SizedBox(
-                    height: 15.h,
+                    height: 20.h,
                   ),
                   Text(
                     'email'.tr,
@@ -193,7 +202,7 @@ class _PersonalDataState extends State<PersonalData> {
                   ),
                   Text(
                     'userName'.tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                     ),
                   ),
@@ -286,7 +295,7 @@ class _PersonalDataState extends State<PersonalData> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              provider.profileData!.phoneNumber ?? '',
+                              provider.profileData!.phoneNumber ?? "",
                               style: getRegularStyle(color: ColorManager.gray),
                             ),
                           ],
@@ -297,64 +306,65 @@ class _PersonalDataState extends State<PersonalData> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  CustomButtonPrimary(
-                    text: "changePassword".tr,
-                    onpressed: () {
-                      print({getIt<SharedPreferenceHelper>().getUserToken()});
-                      Get.toNamed(RouteHelper.changePassword);
-                    },
-                  ),
+
                   CustomButtonPrimary(
                     text: "save".tr,
                     onpressed: () async {
                       try {
                         await provider.updateImage(provider.imageFile!);
-                        print("Joe");
-                        print(provider.imageFile!.path);
+
                       } catch (e) {
-                        print(e.toString());
                       }
                     },
                   ),
+
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.white,
+                          side: const BorderSide(color: ColorManager.primary,width: 1),
+                          shape:
+                          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          textStyle: TextStyle(
+                            fontFamily: 'DroidKufi',
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                        onPressed: () async{
+                          await provider.getComplaintReplay();
+                          await provider.getProfileData();
+                          await provider.getUserNotification();
+                          await provider.getClassTime();
+                          await provider.getOrderReplay();
+                          Get.toNamed(RouteHelper.changePassword);
+                        },
+                        child: Text("changePassword".tr,style: getRegularStyle(color: ColorManager.primary),)),
+                  ),
+
                 ],
               ),
             ),
           ),
+          connectivityBuilder:
+              (BuildContext context, ConnectivityResult connectivity, Widget child) {
+
+            final bool connected = connectivity != ConnectivityResult.none;
+            return connected?child:NoConnectionScreen();
+
+
+          },
         ),
       );
     });
   }
 
-  Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
 
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
-
-  Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
 
   Widget bottomSheet() {
     return Consumer<AppProvider>(builder: (context, provider, x) {

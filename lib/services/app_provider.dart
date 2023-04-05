@@ -33,6 +33,33 @@ class AppProvider extends ChangeNotifier {
     getStandardRate();
   }
 
+  Map<int,String> daysAr= {
+
+    0:"الأحد",
+    1:"الاثنين",
+    2:"الثلاثاء",
+    3:"الأربعاء",
+    4:"الخميس",
+    5:"الجمعة",
+    6:"السبت",
+  };
+  Map<int,String> daysEn= {
+
+    0:"Sunday",
+    1:"Monday",
+    2:"Tuesday",
+    3:"Wednesday",
+    4:"Thursday",
+    5:"Friday",
+    6:"Saturday",
+  };
+
+  TextEditingController titleCompController = TextEditingController();
+  TextEditingController subjectCompController = TextEditingController();
+
+  TextEditingController titleReqController = TextEditingController();
+  TextEditingController subjectReqController = TextEditingController();
+
   int? _id;
 
   int get id => _id!;
@@ -51,6 +78,33 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int? _classID;
+
+  int get classID => _classID!;
+
+  void setClassID(int classID) {
+    _classID = classID;
+    notifyListeners();
+  }
+
+  String? _classStart;
+
+  String get classStart => _classStart!;
+
+  void setClassStart(String classStart) {
+    _classStart = classStart;
+    notifyListeners();
+  }
+
+  String? _classEnd;
+
+  String get classEnd => _classEnd!;
+
+  void setClassEnd(String classEnd) {
+    _classEnd = classEnd;
+    notifyListeners();
+  }
+
   bool? _presence;
 
   bool get presenceValue => _presence!;
@@ -60,7 +114,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool presence = false;
+  bool presence = true;
 
   changePresence() {
     presence = true;
@@ -68,7 +122,7 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool absence = false;
+  bool absence = true;
 
   changeAbsence() {
     presence = false;

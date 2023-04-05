@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:future_heroes_coach/data/api/api_client.dart';
-import 'package:future_heroes_coach/data/api/api_client.dart';
 import 'package:future_heroes_coach/pages/auth/login.dart';
 import 'package:future_heroes_coach/resources/color_manager.dart';
 import 'package:future_heroes_coach/routes/route_helper.dart';
@@ -38,6 +37,9 @@ class _ProfilePageState extends State<ProfilePage> {
           barrierDismissible: false, // user must tap button!
           builder: (BuildContext context) {
             return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0))),
+
               title: Column(
                 children: [
                   SizedBox(
@@ -181,14 +183,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: getBoldStyle(color: Colors.black),
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 15.h,
                   ),
                   Text(
                     provider.profileData!.email!,
                     style: getRegularStyle(color: Colors.black),
                   ),
                   SizedBox(
-                    height: 5.h,
+                    height: 15.h,
                   ),
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
@@ -216,16 +218,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       }),
 
                   //الطلبات والشكاوي
-                  ProfileSection(
-                      label: "requestsAndComplaints".tr,
-                      haveArrow: true,
-                      icon: IconAssets.paper,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.requestsAndComplaints);
-                      }),
+                  // ProfileSection(
+                  //     label: "requestsAndComplaints".tr,
+                  //     haveArrow: true,
+                  //     icon: IconAssets.paper,
+                  //     onTap: () {
+                  //       Get.toNamed(RouteHelper.requestsAndComplaints);
+                  //     }),
 
                   //مواعيد التدريب
-
+SizedBox(height: 20.h,),
                   ProfileSection(
                       label: "classTime".tr,
                       haveArrow: true,
@@ -233,6 +235,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () {
                         Get.toNamed(RouteHelper.classTime);
                       }),
+                  SizedBox(height: 20.h,),
 
                   //ترقية الاشتراك
                   // ProfileSection(
@@ -245,13 +248,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   //تاجيل موعد حجز
 
-                  ProfileSection(
-                      label: "ShowStudents".tr,
-                      haveArrow: true,
-                      icon: IconAssets.user_ninja,
-                      onTap: () {
-                        Get.toNamed(RouteHelper.showStudents);
-                      }),
+                  // ProfileSection(
+                  //     label: "ShowStudents".tr,
+                  //     haveArrow: true,
+                  //     icon: IconAssets.user_ninja,
+                  //     onTap: () {
+                  //       Get.toNamed(RouteHelper.showStudents);
+                  //     }),
 
                   //اللغة
                   ProfileSection(
@@ -261,6 +264,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () {
                         Get.toNamed(RouteHelper.language);
                       }),
+                  SizedBox(height: 20.h,),
 
                   //تسجيل الخروج
                   ProfileSection(
@@ -271,6 +275,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () {
                         _logoutDialog();
                       }),
+                  SizedBox(height: 20.h,),
 
                   //حذف الحساب
                   ProfileSection(
@@ -290,86 +295,6 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  Future _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
-
-  Future _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker().getImage(
-      source: ImageSource.camera,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-
-    if (pickedFile != null) {
-      // File imageFile = File(pickedFile.path);
-      final imageTemp = File(pickedFile.path);
-      setState(() => this.imageFile = imageTemp);
-    }
-  }
-
-  Widget bottomSheet() {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30))),
-      height: 200.h,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Text(
-            'changePhoto'.tr,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromCamera();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openCamera'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 5),
-            ),
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          Text('or'.tr),
-          SizedBox(
-            height: 7.h,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _getFromGallery();
-                Navigator.pop(context);
-              });
-            },
-            child: Text('openGallery'.tr),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 95, vertical: 5),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Future<void> _deleteAccountDialog() async {
     return showDialog<void>(
@@ -377,6 +302,9 @@ class _ProfilePageState extends State<ProfilePage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

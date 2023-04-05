@@ -10,7 +10,7 @@ class DateWidget extends StatefulWidget {
 
   String? type;
 
-  Function()? onTapReq;
+
   Function()? onTapShow;
   DateWidget(
       {super.key,
@@ -18,7 +18,7 @@ class DateWidget extends StatefulWidget {
       this.timeStart,
       this.timeEnd,
       this.type,
-      this.onTapReq,
+
       this.onTapShow});
 
   @override
@@ -218,35 +218,7 @@ class _DateWidgetState extends State<DateWidget> {
                                 SizedBox(
                                   width: 10.w,
                                 ),
-                                Container(
-                                  child: ElevatedButton(
-                                    onPressed: widget.onTapReq,
-                                    style: ElevatedButton.styleFrom(
-                                      foregroundColor: ColorManager.white,
-                                      side: BorderSide(
-                                          color: ColorManager.primary),
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10.h),
-                                      primary: ColorManager.white,
-                                      textStyle: TextStyle(
-                                        fontFamily: 'DroidKufi',
-                                        fontSize: 16.sp,
-                                      ),
-                                    ),
-                                    child: Container(
-                                      width: 100.w,
-                                      padding: EdgeInsets.all(6),
-                                      child: Center(
-                                        child: Text(
-                                          'requestPostponement'.tr,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: ColorManager.primary),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+
                               ],
                             ),
 

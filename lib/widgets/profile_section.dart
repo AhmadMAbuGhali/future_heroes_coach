@@ -29,7 +29,7 @@ class ProfileSection extends StatelessWidget {
               ),
               Text(
               label,
-              style: getBoldStyle(color: myColor!, fontSize: 12.sp),
+              style: getBoldStyle(color: myColor!, fontSize: 14.sp),
             ),
               const Spacer(),
               haveArrow?Icon(Icons.arrow_forward_ios_outlined,size: 15.w,):Container(),
@@ -41,7 +41,7 @@ class ProfileSection extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 7.h,
+          height: 10.h,
         ),
         const Divider(
           height: 1,
