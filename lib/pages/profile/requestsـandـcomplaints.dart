@@ -53,72 +53,83 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: OfflineBuilder(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Padding(
-            padding:  EdgeInsets.only(top: 40.h),
-            child: Column(children: [
-
-
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: DefaultTabController(
-                    length: 2,
-                    child: Column(
-                      children: <Widget>[
-                        ButtonsTabBar(
-                          buttonMargin: const EdgeInsets.symmetric(horizontal: 10),
-                          contentPadding: EdgeInsets.only(
-                              top: 6.h, bottom: 10.h, left: 17.w, right: 18.w),
-                          height: 45.h,
-                          backgroundColor: ColorManager.primary,
-                          unselectedBackgroundColor: Colors.white,
-                          unselectedLabelStyle:
-                          getBoldStyle(color: Colors.black, fontSize: 12),
-                          borderWidth: 1,
-                          borderColor: ColorManager.primary,
-                          labelStyle:
-                          getBoldStyle(color: ColorManager.white, fontSize: 12),
-                          tabs: [
-                            Tab(
-                              text: "complaints".tr,
-                              height: 70.h,
+    return Consumer<AppProvider>(builder: (context, provider, x) {
+      return RefreshIndicator(
+        onRefresh: () async {
+          await provider.getComplaintReplay();
+          await provider.getOrderReplay();
+        },
+        child: Scaffold(
+          body: OfflineBuilder(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Padding(
+                padding: EdgeInsets.only(top: 40.h),
+                child: Column(children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: DefaultTabController(
+                        length: 2,
+                        child: Column(
+                          children: <Widget>[
+                            ButtonsTabBar(
+                              buttonMargin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              contentPadding: EdgeInsets.only(
+                                  top: 6.h,
+                                  bottom: 10.h,
+                                  left: 17.w,
+                                  right: 18.w),
+                              height: 45.h,
+                              backgroundColor: ColorManager.primary,
+                              unselectedBackgroundColor: Colors.white,
+                              unselectedLabelStyle: getBoldStyle(
+                                  color: Colors.black, fontSize: 12),
+                              borderWidth: 1,
+                              borderColor: ColorManager.primary,
+                              labelStyle: getBoldStyle(
+                                  color: ColorManager.white, fontSize: 12),
+                              tabs: [
+                                Tab(
+                                  text: "complaints".tr,
+                                  height: 70.h,
+                                ),
+                                Tab(
+                                  text: 'requests'.tr,
+                                  height: 70.h,
+                                ),
+                              ],
                             ),
-                            Tab(
-                              text: 'requests'.tr,
-                              height: 70.h,
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: TabBarView(
-                            children: <Widget>[
-                              Center(
-                                  child: Column(children: [
+                            Expanded(
+                              child: TabBarView(
+                                children: <Widget>[
+                                  Center(
+                                      child: Column(children: [
                                     SizedBox(
                                       height: 10.h,
                                     ),
                                     SizedBox(
                                         height:
-                                        MediaQuery.of(context).size.height * 0.65,
+                                            MediaQuery.of(context).size.height *
+                                                0.65,
                                         child: const CustomComplaints()),
                                     CustomButtonPrimary(
                                         text: "sendComplaint".tr,
                                         onpressed: () {
-                                          Get.toNamed(RouteHelper.sendComplaints);
+                                          Get.toNamed(
+                                              RouteHelper.sendComplaints);
                                         }),
                                   ])),
-                              Center(
-                                  child: Column(children: [
+                                  Center(
+                                      child: Column(children: [
                                     SizedBox(
                                       height: 10.h,
                                     ),
                                     SizedBox(
                                         height:
-                                        MediaQuery.of(context).size.height * 0.65,
+                                            MediaQuery.of(context).size.height *
+                                                0.65,
                                         child: const CustomRequest()),
                                     CustomButtonPrimary(
                                         text: 'sendRequest'.tr,
@@ -126,26 +137,25 @@ class _RequestsAndComplaintsState extends State<RequestsAndComplaints>
                                           Get.toNamed(RouteHelper.sendRequests);
                                         }),
                                   ])),
-                            ],
-                          ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              )
-            ]),
+                  )
+                ]),
+              ),
+            ),
+            connectivityBuilder: (BuildContext context,
+                ConnectivityResult connectivity, Widget child) {
+              final bool connected = connectivity != ConnectivityResult.none;
+              return connected ? child : NoConnectionScreen();
+            },
           ),
         ),
-        connectivityBuilder:
-            (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
-          final bool connected = connectivity != ConnectivityResult.none;
-          return connected?child:NoConnectionScreen();
-
-
-        },
-      ),
-    );
+      );
+    });
   }
 }

@@ -175,7 +175,6 @@ class MyLocale extends Translations {
               "تقييمك في  الادب والأخلاق هو 3  من  5",
           "coachNoteTitle": ": ملاحظات أخرى من المدرب",
           "MembershipNo": "رقم العضوية",
-
           "coachNoteBody":
               "هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن المحتوى  المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي.. هناك حقيقة مثبتة منذ زمن طويل  وهي أن ال",
           "logoutPopUpText": "هل انت متأكد من تسجيل الخروج",
@@ -376,7 +375,7 @@ class MyLocale extends Translations {
           "noInternet":
               "Unfortunately, it is not possible to connect to the Internet. Please check.",
           "tryAgain": "try again",
-          "requestsAndComplaints": "RequestsAndComplaints",
+          "requestsAndComplaints": "Requests And Complaints",
           "classTime": "training times",
           "subscriptionUpgrade": "Subscription Upgrade",
           "language": "language",

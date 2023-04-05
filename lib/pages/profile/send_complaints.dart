@@ -22,7 +22,6 @@ import '../auth/NoConnection.dart';
 class SendComplaints extends StatelessWidget {
   SendComplaints({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(builder: (context, provider, x) {
@@ -46,6 +45,8 @@ class SendComplaints extends StatelessWidget {
                                   Get.back();
                                   await provider.getOrderReplay();
                                   await provider.getComplaintReplay();
+                                  provider.titleCompController.clear();
+                                  provider.subjectCompController.clear();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back,
@@ -64,8 +65,8 @@ class SendComplaints extends StatelessWidget {
                     ),
                     Center(
                         child: CustomTextTitle(
-                          text: 'sendComplaint'.tr,
-                        )),
+                      text: 'sendComplaint'.tr,
+                    )),
                     SizedBox(
                       height: 24.h,
                     ),
@@ -100,15 +101,16 @@ class SendComplaints extends StatelessWidget {
                             horizontal: 16.w, vertical: 14.h),
                         hintText: 'complaintTopic'.tr,
                         hintStyle: getRegularStyle(
-                            color: ColorManager.otpDesc, fontSize: FontSize.s14),
+                            color: ColorManager.otpDesc,
+                            fontSize: FontSize.s14),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorManager.borderTextFiel, width: 1.0),
                             borderRadius: BorderRadius.circular(12.r)),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
-                          borderSide:
-                          const BorderSide(color: ColorManager.primary, width: 1.0),
+                          borderSide: const BorderSide(
+                              color: ColorManager.primary, width: 1.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
@@ -131,37 +133,37 @@ class SendComplaints extends StatelessWidget {
                     CustomButtonPrimary(
                         text: "sendComplaint".tr,
                         onpressed: () {
-                          if(provider.titleCompController.text.trim().isNotEmpty&&provider.subjectCompController.text.trim().isNotEmpty){
+                          if (provider.titleCompController.text
+                                  .trim()
+                                  .isNotEmpty &&
+                              provider.subjectCompController.text
+                                  .trim()
+                                  .isNotEmpty) {
                             provider.postComplaint(
                                 provider.titleCompController.text.trim(),
                                 provider.subjectCompController.text.trim());
                             snakbarWidget(context,
-                                Titel: 'SentSuccesfully'.tr,
-                                Description: 'TheComplSent'.tr)
+                                    Titel: 'SentSuccesfully'.tr,
+                                    Description: 'TheComplSent'.tr)
                                 .Success();
                             provider.titleCompController.clear();
                             provider.subjectCompController.clear();
-                          }else{
+                          } else {
                             snakbarWidget(context,
-                                Titel: 'DataError'.tr,
-                                Description: 'EnterAllData'.tr)
+                                    Titel: 'DataError'.tr,
+                                    Description: 'EnterAllData'.tr)
                                 .error();
                           }
-
-
                         }),
                   ],
                 ),
               ),
             ),
           ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
+          connectivityBuilder: (BuildContext context,
+              ConnectivityResult connectivity, Widget child) {
             final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
+            return connected ? child : NoConnectionScreen();
           },
         ),
       );

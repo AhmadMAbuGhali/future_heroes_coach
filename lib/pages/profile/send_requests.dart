@@ -43,6 +43,8 @@ class SendRequests extends StatelessWidget {
                                   Get.back();
                                   await provider.getOrderReplay();
                                   await provider.getComplaintReplay();
+                                  provider.titleReqController.clear();
+                                  provider.subjectReqController.clear();
                                 },
                                 icon: const Icon(
                                   Icons.arrow_back,
@@ -61,8 +63,8 @@ class SendRequests extends StatelessWidget {
                     ),
                     Center(
                         child: CustomTextTitle(
-                          text: 'sendRequest'.tr,
-                        )),
+                      text: 'sendRequest'.tr,
+                    )),
                     SizedBox(
                       height: 24.h,
                     ),
@@ -97,7 +99,8 @@ class SendRequests extends StatelessWidget {
                             horizontal: 16.w, vertical: 14.h),
                         hintText: 'requestTopic'.tr,
                         hintStyle: getRegularStyle(
-                            color: ColorManager.otpDesc, fontSize: FontSize.s14),
+                            color: ColorManager.otpDesc,
+                            fontSize: FontSize.s14),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: ColorManager.borderTextFiel, width: 1.0),
@@ -128,28 +131,37 @@ class SendRequests extends StatelessWidget {
                     CustomButtonPrimary(
                         text: "sendRequest".tr,
                         onpressed: () {
-                          provider.postOrder(provider.titleReqController.text.trim(),
-                              provider.subjectReqController.text.trim());
-
-                          snakbarWidget(context,
-                              Titel: 'SentSuccesfully'.tr,
-                              Description: 'TheReqSent'.tr)
-                              .Success();
-                          provider.titleReqController.clear();
-                          provider.subjectReqController.clear();
+                          if (provider.titleReqController.text
+                                  .trim()
+                                  .isNotEmpty &&
+                              provider.subjectReqController.text
+                                  .trim()
+                                  .isNotEmpty) {
+                            provider.postOrder(
+                                provider.titleReqController.text.trim(),
+                                provider.subjectReqController.text.trim());
+                            snakbarWidget(context,
+                                    Titel: 'SentSuccesfully'.tr,
+                                    Description: 'TheComplSent'.tr)
+                                .Success();
+                            provider.titleReqController.clear();
+                            provider.subjectReqController.clear();
+                          } else {
+                            snakbarWidget(context,
+                                    Titel: 'DataError'.tr,
+                                    Description: 'EnterAllData'.tr)
+                                .error();
+                          }
                         }),
                   ],
                 ),
               ),
             ),
           ),
-          connectivityBuilder:
-              (BuildContext context, ConnectivityResult connectivity, Widget child) {
-
+          connectivityBuilder: (BuildContext context,
+              ConnectivityResult connectivity, Widget child) {
             final bool connected = connectivity != ConnectivityResult.none;
-            return connected?child:NoConnectionScreen();
-
-
+            return connected ? child : NoConnectionScreen();
           },
         ),
       );

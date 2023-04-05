@@ -33,25 +33,23 @@ class AppProvider extends ChangeNotifier {
     getStandardRate();
   }
 
-  Map<int,String> daysAr= {
-
-    0:"الأحد",
-    1:"الاثنين",
-    2:"الثلاثاء",
-    3:"الأربعاء",
-    4:"الخميس",
-    5:"الجمعة",
-    6:"السبت",
+  Map<int, String> daysAr = {
+    0: "الأحد",
+    1: "الاثنين",
+    2: "الثلاثاء",
+    3: "الأربعاء",
+    4: "الخميس",
+    5: "الجمعة",
+    6: "السبت",
   };
-  Map<int,String> daysEn= {
-
-    0:"Sunday",
-    1:"Monday",
-    2:"Tuesday",
-    3:"Wednesday",
-    4:"Thursday",
-    5:"Friday",
-    6:"Saturday",
+  Map<int, String> daysEn = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
   };
 
   TextEditingController titleCompController = TextEditingController();
@@ -136,35 +134,35 @@ class AppProvider extends ChangeNotifier {
   int _currentIntValue4 = 3;
   int _currentIntValue5 = 3;
 
-  int get currentIntValue1 => _currentIntValue1!;
+  int get currentIntValue1 => _currentIntValue1;
 
   void setcurrentIntValue1(int currentIntValue1) {
     _currentIntValue1 = currentIntValue1;
     notifyListeners();
   }
 
-  int get currentIntValue2 => _currentIntValue2!;
+  int get currentIntValue2 => _currentIntValue2;
 
   void setcurrentIntValue2(int currentIntValue2) {
     _currentIntValue2 = currentIntValue2;
     notifyListeners();
   }
 
-  int get currentIntValue3 => _currentIntValue3!;
+  int get currentIntValue3 => _currentIntValue3;
 
   void setcurrentIntValue3(int currentIntValue3) {
     _currentIntValue3 = currentIntValue3;
     notifyListeners();
   }
 
-  int get currentIntValue4 => _currentIntValue4!;
+  int get currentIntValue4 => _currentIntValue4;
 
   void setcurrentIntValue4(int currentIntValue4) {
     _currentIntValue4 = currentIntValue4;
     notifyListeners();
   }
 
-  int get currentIntValue5 => _currentIntValue5!;
+  int get currentIntValue5 => _currentIntValue5;
 
   void setcurrentIntValue5(int currentIntValue5) {
     _currentIntValue5 = currentIntValue5;
