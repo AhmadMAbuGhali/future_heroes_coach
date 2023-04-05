@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: 0,
                   right: 0,
                   child: Container(
-                    height: 270,
+                    height: 280,
                     width: double.infinity,
                     decoration: new BoxDecoration(
                       image: new DecorationImage(
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 80.h,
+                          height: 60.h,
                         ),
                         CircleAvatar(
                           radius: 50.r,
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Positioned(
-                    top: 280.h,
+                    top: 250.h,
                     left: 20,
                     right: 20,
                     bottom: 20,

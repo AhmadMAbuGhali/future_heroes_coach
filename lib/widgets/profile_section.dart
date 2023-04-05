@@ -29,7 +29,7 @@ class ProfileSection extends StatelessWidget {
               ),
               Text(
               label,
-              style: getBoldStyle(color: myColor!, fontSize: 14.sp),
+              style: getBoldStyle(color: myColor!, fontSize: 12.sp),
             ),
               const Spacer(),
               haveArrow?Icon(Icons.arrow_forward_ios_outlined,size: 15.w,):Container(),
