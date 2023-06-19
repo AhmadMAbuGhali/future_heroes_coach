@@ -142,7 +142,7 @@ class SendRequests extends StatelessWidget {
                                 provider.subjectReqController.text.trim());
                             snakbarWidget(context,
                                     Titel: 'SentSuccesfully'.tr,
-                                    Description: 'TheComplSent'.tr)
+                                    Description: 'TheReqSent'.tr)
                                 .Success();
                             provider.titleReqController.clear();
                             provider.subjectReqController.clear();

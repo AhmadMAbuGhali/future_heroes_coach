@@ -1,5 +1,5 @@
 class ApiConstant {
-  static const String baseUrl = 'https://yousef.azurewebsites.net/api/';
+  static const String baseUrl ='http://futureheroes-001-site1.gtempurl.com/api/' ;
   static const String login = 'Authentication/login';
   static const String register = 'Authentication/register';
   static const String completeProfile = 'Authentication/CompleteProfile';
@@ -41,7 +41,7 @@ class ApiConstant {
       'Authentication/ResetPasswordAuthorize';
   static const String getProfileData = 'Authentication/CoachProfile';
   static const String studentsClass = 'Class/StudentsClass';
-  static const String imageURL = 'https://yousef.azurewebsites.net/images/';
+  static const String imageURL = 'http://futureheroes-001-site1.gtempurl.com/images/';
   static const String updateImageProfile = 'Authentication/UpdateImageProfile';
   static const String getstandardRate = 'Standard/model';
 }

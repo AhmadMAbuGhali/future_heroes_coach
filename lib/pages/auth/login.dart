@@ -149,30 +149,37 @@ class Login extends StatelessWidget {
                               loginFormKey.currentState!.save();
                               await provider.login(provider.emailLoginPage.text,
                                   provider.passwordLoginPage.text, context);
+
                               if (loginFormKey.currentState!.validate()) {
                                 String? statusString =
-                                    getIt<SharedPreferenceHelper>().getStatus();
-                                if (statusString == 'success') {
+                                getIt<SharedPreferenceHelper>().getStatus();
+
+                                bool? active =
+                                getIt<SharedPreferenceHelper>().getActiveStat();
+                                if (active == true) {
                                   await Get.offNamed(RouteHelper.successLogin);
+
                                 } else {
                                   snakbarWidget(
                                     context,
                                     Titel: 'dataErorr'.tr,
-                                    Description: 'Make sure that Data is Good'.tr,
+                                    Description:
+                                    'Make sure that Tesrtymf,sdgs.df is Good'.tr,
                                   ).error();
                                 }
                               } else {
                                 snakbarWidget(
                                   context,
                                   Titel: 'dataErorr'.tr,
-                                  Description: 'Make sure asdas that Data is Good'.tr,
+                                  Description:
+                                  'Make sure  that data is Good'.tr,
                                 ).error();
                               }
                             } else {
-                              CircularProgressIndicator();
+                              const CircularProgressIndicator();
                             }
                           },
-                        )
+                        ),
                       ],
                     ),
                   ),
